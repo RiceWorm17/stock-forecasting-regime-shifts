@@ -1,0 +1,205 @@
+{
+  "artifacts": {
+    "macro_metrics": {
+      "path": "metrics/baseline_metrics_macro_27bb8779cf550b7cf288e098f7551eac43100879afe09786265ef70d69be65c8.csv",
+      "sha256": "27bb8779cf550b7cf288e098f7551eac43100879afe09786265ef70d69be65c8"
+    },
+    "per_asset_metrics": {
+      "path": "metrics/baseline_metrics_by_asset_ac1a32f81a6cf597e186f317ca2983ac15c0cf45c75c2c0968a4dce85e6a6a16.csv",
+      "sha256": "ac1a32f81a6cf597e186f317ca2983ac15c0cf45c75c2c0968a4dce85e6a6a16"
+    },
+    "predictions": {
+      "path": "predictions/baseline_predictions_e09e4909e9af7b7836c5e0b2c8d7b320d2848d5da9b33b8c9492421e0a108bb4.csv",
+      "sha256": "e09e4909e9af7b7836c5e0b2c8d7b320d2848d5da9b33b8c9492421e0a108bb4"
+    }
+  },
+  "configuration": {
+    "data_config": {
+      "path": "configs/data.yaml",
+      "sha256": "bdbd3d48be74e09228d500c0e753af0da7e41cac43055e1652f897855e0bd3ed"
+    },
+    "walk_forward_config": {
+      "path": "configs/walk_forward.yaml",
+      "sha256": "ac709ec4bb76e9e963ddeee072430b3511b46457846715e11f634a0f13d37d08"
+    }
+  },
+  "counts": {
+    "macro_metric_rows": 5,
+    "per_asset_metric_rows": 20,
+    "prediction_rows": 5032
+  },
+  "created_timestamp_utc": "2026-09-14T04:15:42.948003Z",
+  "environment_lock": {
+    "path": "pyproject.toml",
+    "sha256": "6f87b6922f9fab5e5b17392c395a27d1c86fefaf7af453e65dbce628d0ba6a85"
+  },
+  "evaluation": {
+    "eligibility_filter": "core_evaluation_eligible == true",
+    "final_fold_excluded": true,
+    "folds": [
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5"
+    ],
+    "macro_weighting": "equal_weight_across_assets",
+    "partition": "test",
+    "target_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ]
+  },
+  "experiment_spec_version": "1.1",
+  "fitted_preprocessing_artifact_identifiers": [],
+  "input_provenance": {
+    "processed_dataset_file": "supervised_v1_9352da6b434011f9844ef0acc1813ea33dce39152712752bba21a3005aabf7be.csv",
+    "processed_dataset_sha256": "9352da6b434011f9844ef0acc1813ea33dce39152712752bba21a3005aabf7be",
+    "processed_manifest_file": "supervised_v1_9352da6b434011f9844ef0acc1813ea33dce39152712752bba21a3005aabf7be.manifest.json",
+    "raw_manifest_file": "yfinance_daily_2015-01-01_2025-12-31_20260913T152313Z_55f74f058493.manifest.json",
+    "raw_snapshot_file": "yfinance_daily_2015-01-01_2025-12-31_20260913T152313Z_55f74f058493.csv",
+    "source_snapshot_sha256": "55f74f058493102387f1c2d0a848bd673a3cfa0473d617dfdb34aea8a94f7736"
+  },
+  "model_configuration": {
+    "fitted_parameters": false,
+    "model_config_id": "zero_return__direction_persistence_v1",
+    "seed": "not_applicable"
+  },
+  "models": {
+    "combined_prediction_record_id": "zero_return__direction_persistence",
+    "direction": {
+      "definition": "predicted next-day direction is 1 iff the current asset log return is strictly positive; otherwise 0",
+      "id": "direction_persistence"
+    },
+    "regression": {
+      "definition": "predicted next-day log return is always 0.0",
+      "id": "zero_return"
+    },
+    "skill_score_vs_self": {
+      "interpretation": "zero_by_definition_not_meaningful",
+      "value": 0.0
+    }
+  },
+  "package_versions": {
+    "PyYAML": "6.0.3",
+    "exchange-calendars": "4.13.2",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "python": "3.12.14",
+    "yfinance": "1.7.0"
+  },
+  "prediction_contract": {
+    "columns": [
+      "run_id",
+      "spec_version",
+      "data_version",
+      "model",
+      "model_config_id",
+      "seed",
+      "fold",
+      "partition",
+      "asset",
+      "origin_date",
+      "target_date",
+      "actual_log_return",
+      "predicted_log_return",
+      "actual_direction",
+      "predicted_direction",
+      "trend_regime",
+      "volatility_regime",
+      "transition_regime"
+    ],
+    "regime_label_placeholder": "not_labeled_phase2c",
+    "regime_label_status": "deferred_placeholder_only_no_regime_analysis"
+  },
+  "run_id": "phase2c_dev_9352da6b4340",
+  "runtime": {
+    "exceptions": [],
+    "status": "completed"
+  },
+  "schema_version": 1,
+  "source_revision": {
+    "files": {
+      "src/evaluation/baseline_evaluation.py": "15437a48702f2e70adf5e2cad460d39b63a61c60799a02bd46703ec89b70ffc2",
+      "src/evaluation/run_baselines.py": "8d09840b03113f26eaef57b185fe8dde674c7106f4423447c0c86d78b415e1fb",
+      "src/evaluation/walk_forward.py": "0d10541bd3ebcf12cdf28287cb609694c0352ab7112e23921e38a9d8ea688c8c",
+      "src/models/baselines.py": "0165c8a1234bad808572ac34183c439a8691d8f2969cb52a5a9b02eb9dddd68c"
+    },
+    "method": "sha256_by_source_file"
+  },
+  "training_validation_date_bounds": {
+    "D1": {
+      "test": {
+        "end": "2020-12-31",
+        "start": "2020-01-01"
+      },
+      "train": {
+        "end": "2018-12-31",
+        "start": "2015-01-01"
+      },
+      "validation": {
+        "end": "2019-12-31",
+        "start": "2019-01-01"
+      }
+    },
+    "D2": {
+      "test": {
+        "end": "2021-12-31",
+        "start": "2021-01-01"
+      },
+      "train": {
+        "end": "2019-12-31",
+        "start": "2015-01-01"
+      },
+      "validation": {
+        "end": "2020-12-31",
+        "start": "2020-01-01"
+      }
+    },
+    "D3": {
+      "test": {
+        "end": "2022-12-31",
+        "start": "2022-01-01"
+      },
+      "train": {
+        "end": "2020-12-31",
+        "start": "2015-01-01"
+      },
+      "validation": {
+        "end": "2021-12-31",
+        "start": "2021-01-01"
+      }
+    },
+    "D4": {
+      "test": {
+        "end": "2023-12-31",
+        "start": "2023-01-01"
+      },
+      "train": {
+        "end": "2021-12-31",
+        "start": "2015-01-01"
+      },
+      "validation": {
+        "end": "2022-12-31",
+        "start": "2022-01-01"
+      }
+    },
+    "D5": {
+      "test": {
+        "end": "2024-12-31",
+        "start": "2024-01-01"
+      },
+      "train": {
+        "end": "2022-12-31",
+        "start": "2015-01-01"
+      },
+      "validation": {
+        "end": "2023-12-31",
+        "start": "2023-01-01"
+      }
+    }
+  }
+}

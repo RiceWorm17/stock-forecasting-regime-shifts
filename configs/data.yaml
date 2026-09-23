@@ -1,0 +1,15 @@
+schema_version: 1
+provider: yfinance
+assets:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - NVDA
+market_reference:
+  - SPY
+start_date: "2015-01-01"
+end_date: "2025-12-31"
+frequency: daily
+timezone: America/New_York
+auto_adjust: true
+

@@ -1,0 +1,41 @@
+schema_version: 1
+partition_key: target_date
+default_development_folds:
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+final_fold: F1
+folds:
+  D1:
+    train: {start: "2015-01-01", end: "2018-12-31"}
+    validation: {start: "2019-01-01", end: "2019-12-31"}
+    test: {start: "2020-01-01", end: "2020-12-31"}
+    test_role: development
+  D2:
+    train: {start: "2015-01-01", end: "2019-12-31"}
+    validation: {start: "2020-01-01", end: "2020-12-31"}
+    test: {start: "2021-01-01", end: "2021-12-31"}
+    test_role: development
+  D3:
+    train: {start: "2015-01-01", end: "2020-12-31"}
+    validation: {start: "2021-01-01", end: "2021-12-31"}
+    test: {start: "2022-01-01", end: "2022-12-31"}
+    test_role: development
+  D4:
+    train: {start: "2015-01-01", end: "2021-12-31"}
+    validation: {start: "2022-01-01", end: "2022-12-31"}
+    test: {start: "2023-01-01", end: "2023-12-31"}
+    test_role: development
+  D5:
+    train: {start: "2015-01-01", end: "2022-12-31"}
+    validation: {start: "2023-01-01", end: "2023-12-31"}
+    test: {start: "2024-01-01", end: "2024-12-31"}
+    test_role: development
+  F1:
+    train: {start: "2015-01-01", end: "2023-12-31"}
+    validation: {start: "2024-01-01", end: "2024-12-31"}
+    test: {start: "2025-01-01", end: "2025-12-31"}
+    test_role: final_untouched
+

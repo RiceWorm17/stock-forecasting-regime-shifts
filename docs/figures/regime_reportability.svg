@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 1120 900">
+<title id="title">Regime-analysis reportability</title>
+<desc id="desc">Stacked bars show reportable and suppressed asset/fold and macro/fold regime contrasts for two models and three dimensions.</desc>
+<style>
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033}
+.title{font-size:27px;font-weight:700}.subtitle{font-size:15px;fill:#5D6678}
+.axis{font-size:13px;fill:#5D6678}.label{font-size:14px}.small{font-size:12px;fill:#5D6678}
+.value{font-size:12px;font-weight:650}.panel{font-size:17px;font-weight:700}
+</style>
+<rect width="1120" height="900" fill="#FFFFFF"/>
+<text x="56.00" y="48.00" class="title" text-anchor="start">Regime-analysis reportability</text>
+<text x="56.00" y="76.00" class="subtitle" text-anchor="start">Frozen minimum-cell rule: both compared cells must contain at least 30 observations</text>
+<text x="56.00" y="126.00" class="panel" text-anchor="start">Asset/fold contrasts</text>
+<text x="56.00" y="148.00" class="small" text-anchor="start">20 possible per model × regime dimension</text>
+<text x="74.00" y="189.00" class="label" text-anchor="start" font-weight="650">LightGBM</text>
+<text x="337.00" y="217.00" class="axis" text-anchor="end">Trend</text>
+<rect x="355.00" y="202.00" width="390.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="745.00" y="202.00" width="260.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="550.00" y="217.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">12</text>
+<text x="875.00" y="217.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">8</text>
+<text x="1017.00" y="217.00" class="small" text-anchor="start">12/20</text>
+<text x="337.00" y="248.00" class="axis" text-anchor="end">Volatility</text>
+<rect x="355.00" y="233.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="233.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="248.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">16</text>
+<text x="940.00" y="248.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">4</text>
+<text x="1017.00" y="248.00" class="small" text-anchor="start">16/20</text>
+<text x="337.00" y="279.00" class="axis" text-anchor="end">Transition</text>
+<rect x="355.00" y="264.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="264.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="279.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">16</text>
+<text x="940.00" y="279.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">4</text>
+<text x="1017.00" y="279.00" class="small" text-anchor="start">16/20</text>
+<text x="74.00" y="321.00" class="label" text-anchor="start" font-weight="650">LSTM (3-seed mean)</text>
+<text x="337.00" y="349.00" class="axis" text-anchor="end">Trend</text>
+<rect x="355.00" y="334.00" width="390.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="745.00" y="334.00" width="260.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="550.00" y="349.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">12</text>
+<text x="875.00" y="349.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">8</text>
+<text x="1017.00" y="349.00" class="small" text-anchor="start">12/20</text>
+<text x="337.00" y="380.00" class="axis" text-anchor="end">Volatility</text>
+<rect x="355.00" y="365.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="365.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="380.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">16</text>
+<text x="940.00" y="380.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">4</text>
+<text x="1017.00" y="380.00" class="small" text-anchor="start">16/20</text>
+<text x="337.00" y="411.00" class="axis" text-anchor="end">Transition</text>
+<rect x="355.00" y="396.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="396.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="411.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">16</text>
+<text x="940.00" y="411.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">4</text>
+<text x="1017.00" y="411.00" class="small" text-anchor="start">16/20</text>
+<text x="56.00" y="462.00" class="panel" text-anchor="start">Macro/fold contrasts</text>
+<text x="56.00" y="484.00" class="small" text-anchor="start">5 possible per model × regime dimension</text>
+<text x="74.00" y="525.00" class="label" text-anchor="start" font-weight="650">LightGBM</text>
+<text x="337.00" y="553.00" class="axis" text-anchor="end">Trend</text>
+<rect x="355.00" y="538.00" width="390.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="745.00" y="538.00" width="260.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="550.00" y="553.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">3</text>
+<text x="875.00" y="553.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">2</text>
+<text x="1017.00" y="553.00" class="small" text-anchor="start">3/5</text>
+<text x="337.00" y="584.00" class="axis" text-anchor="end">Volatility</text>
+<rect x="355.00" y="569.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="569.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="584.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">4</text>
+<text x="940.00" y="584.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">1</text>
+<text x="1017.00" y="584.00" class="small" text-anchor="start">4/5</text>
+<text x="337.00" y="615.00" class="axis" text-anchor="end">Transition</text>
+<rect x="355.00" y="600.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="600.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="615.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">4</text>
+<text x="940.00" y="615.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">1</text>
+<text x="1017.00" y="615.00" class="small" text-anchor="start">4/5</text>
+<text x="74.00" y="657.00" class="label" text-anchor="start" font-weight="650">LSTM (3-seed mean)</text>
+<text x="337.00" y="685.00" class="axis" text-anchor="end">Trend</text>
+<rect x="355.00" y="670.00" width="390.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="745.00" y="670.00" width="260.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="550.00" y="685.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">3</text>
+<text x="875.00" y="685.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">2</text>
+<text x="1017.00" y="685.00" class="small" text-anchor="start">3/5</text>
+<text x="337.00" y="716.00" class="axis" text-anchor="end">Volatility</text>
+<rect x="355.00" y="701.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="701.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="716.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">4</text>
+<text x="940.00" y="716.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">1</text>
+<text x="1017.00" y="716.00" class="small" text-anchor="start">4/5</text>
+<text x="337.00" y="747.00" class="axis" text-anchor="end">Transition</text>
+<rect x="355.00" y="732.00" width="520.00" height="20.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<rect x="875.00" y="732.00" width="130.00" height="20.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="615.00" y="747.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">4</text>
+<text x="940.00" y="747.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">1</text>
+<text x="1017.00" y="747.00" class="small" text-anchor="start">4/5</text>
+<rect x="355.00" y="794.00" width="15.00" height="15.00" rx="2.00" fill="#009E73" opacity="1.000"/>
+<text x="379.00" y="807.00" class="small" text-anchor="start">Reportable</text>
+<rect x="471.00" y="794.00" width="15.00" height="15.00" rx="2.00" fill="#AEB6C4" opacity="1.000"/>
+<text x="495.00" y="807.00" class="small" text-anchor="start">Suppressed / descriptive only</text>
+<text x="56.00" y="835.00" class="small" text-anchor="start">Totals: 88/120 asset/fold contrasts and 22/30 macro/fold contrasts were reportable.</text>
+<text x="56.00" y="857.00" class="small" text-anchor="start">No model-by-dimension summary has complete five-fold macro support; suppressed cells are missing evidence, not zero effects.</text>
+<text x="56.00" y="884.00" class="small" text-anchor="start">Source: results/regime/development/regime_failure_pattern_summary_68ba67ebb6f5f5ec2e801dee99d0345e9756d5b02c15613800e9c85d1d50391f.csv</text>
+</svg>

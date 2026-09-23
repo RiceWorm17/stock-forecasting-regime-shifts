@@ -1,0 +1,70 @@
+{
+  "artifact_type": "phase2g_patchtst_gate_decision",
+  "decision": "ADMIT PATCHTST TO A PREREGISTERED PILOT",
+  "decision_scope": "Admission authorizes only Phase 2H preregistration followed by a separately gated, bounded pilot. It does not authorize implementation in Phase 2G or a full D1--D5 run.",
+  "f1_2025_performance_evaluated": false,
+  "full_benchmark_automatic_after_pilot": false,
+  "gate_definition_frozen_before_decision": true,
+  "gates": {
+    "G1": {
+      "criterion": "Pipeline maturity",
+      "evidence": "Frozen baseline, LightGBM, and LSTM artifacts passed SHA-256, full-tree, scope, exact-key, and independent metric-reproduction checks.",
+      "status": "PASS"
+    },
+    "G2": {
+      "criterion": "Benchmark incompleteness",
+      "evidence": "LightGBM had positive macro MAE skill in 3/5 folds; LSTM seed-mean had positive macro MAE skill in 0/5. These inconsistent/negative results do not establish that every materially different deep time-series inductive bias is scientifically redundant; the question is diversity, not winner-seeking.",
+      "status": "PASS"
+    },
+    "G3": {
+      "criterion": "Architectural relevance",
+      "evidence": "The frozen specification defines PatchTST as a patch-based transformer for longer temporal context, materially distinct from tabular trees and recurrent LSTM.",
+      "status": "PASS"
+    },
+    "G4": {
+      "criterion": "Dataset feasibility",
+      "evidence": "D1 already supplied 942 causal training feature rows per asset and 880 valid 63-session LSTM endpoints per asset (3,520 across four assets), with 17 frozen features. This is sufficient for a bounded pilot, though not proof that a full transformer benchmark will be worthwhile.",
+      "status": "PASS"
+    },
+    "G5": {
+      "criterion": "Compute feasibility",
+      "evidence": "The three-seed, 180-fit CPU LSTM benchmark completed locally in 1,064.876 s. A one-fold, very-small-space CPU pilot with an explicit wall-time/memory cap is therefore practical; no PatchTST fit or dependency installation occurred here.",
+      "status": "PASS"
+    },
+    "G6": {
+      "criterion": "Scope control",
+      "evidence": "The existing immutable target, 17 features, D1--D5 folds, artifact schema, and selection rules can be reused; Phase 2H must freeze a very small candidate space and pilot acceptance rule before any fit.",
+      "status": "PASS"
+    },
+    "G7": {
+      "criterion": "Final-test protection",
+      "evidence": "Every current comparison is D1--D5/2020--2024 only, and the pilot can be confined to a preregistered development fold without any F1/2025 access.",
+      "status": "PASS"
+    }
+  },
+  "models_trained_during_phase2g": false,
+  "next_phase": "Phase 2H — PatchTST Preregistration and Bounded Pilot",
+  "patchtst_implemented": false,
+  "pilot_must_freeze_before_first_fit": [
+    "architecture",
+    "context_lengths",
+    "seeds",
+    "training_budget",
+    "pilot_fold",
+    "pilot_acceptance_criteria"
+  ],
+  "provenance": {
+    "baseline_prediction_sha256": "e09e4909e9af7b7836c5e0b2c8d7b320d2848d5da9b33b8c9492421e0a108bb4",
+    "experiment_spec_sha256": "4a29b96a7c826634d2dede63220c378737c0e545a7e733491a0a7002d69fc5b9",
+    "experiment_spec_version": "1.1",
+    "generation_timestamp_utc": "2026-09-14T15:00:42.828778Z",
+    "lightgbm_prediction_sha256": "36445836777cba815bc240c0c7229838cdc2177e94f50bac7905b8e2a9ace0c7",
+    "lstm_prediction_sha256": "f624bc00c41a430c6e79188fe8b10a1bc03714971719789d5162446c70c7df60",
+    "model_preregistration_path": "docs/MODEL_PREREGISTRATION.md",
+    "model_preregistration_sha256": "be04b9ce8457c5b26a8042f548eccce8ddb4b5d1b86a1404a43ef1bb1a52d613",
+    "source_revision": "not_available_repository_has_no_git_metadata",
+    "source_tree_sha256": "fe37172dca930c566701f5a8508952705ecb7895784baaae60fabeda519920e3"
+  },
+  "regime_analysis_performed": false,
+  "schema_version": 1
+}

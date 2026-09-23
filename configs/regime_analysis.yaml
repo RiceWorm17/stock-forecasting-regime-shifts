@@ -1,0 +1,491 @@
+schema_version: 1
+artifact_type: regime_analysis_preregistration
+status: "FROZEN BEFORE REGIME LABELING AND STRESS-TEST EXECUTION"
+frozen_on: "2026-09-15"
+
+phase:
+  id: PHASE_2I
+  purpose: preregistration_and_development_stress_test_design_only
+  regime_label_generation_authorized_now: false
+  regime_metric_computation_authorized_now: false
+  model_training_authorized_now: false
+  historical_prediction_or_metric_mutation_authorized_now: false
+  f1_2025_access_authorized_now: false
+  next_phase: "Phase 2J / Development Regime Stress-Test Execution"
+
+provenance:
+  experiment_specification:
+    path: docs/EXPERIMENT_SPEC.md
+    version: "1.1"
+    sha256: 4a29b96a7c826634d2dede63220c378737c0e545a7e733491a0a7002d69fc5b9
+  model_preregistration:
+    path: docs/MODEL_PREREGISTRATION.md
+    sha256: be04b9ce8457c5b26a8042f548eccce8ddb4b5d1b86a1404a43ef1bb1a52d613
+  patchtst_preregistration:
+    path: docs/PATCHTST_PREREGISTRATION.md
+    sha256: adb4be727379d005dc69fd6d8528c6e46abda993394f21a946097e59cabfb486
+  phase2g_report:
+    path: PHASE_2G_REPORT.md
+    sha256: e745662a3a8a8a8497348e2480e821a44ab4b55d7ff16721e3f42067db607667
+  phase2hc_report:
+    path: PHASE_2H_C_REPORT.md
+    sha256: 01ce5c04c76a56219ddcb542c01b77ff560777420aeecab92903cc22fd0521b9
+  patchtst_authorization:
+    path: results/patchtst/authorization/patchtst_full_benchmark_authorization_5b63c323c9b28ddd1aa666365fb9df785fc21e6d45705317624e2ac77c811405.json
+    sha256: 5b63c323c9b28ddd1aa666365fb9df785fc21e6d45705317624e2ac77c811405
+    decision: DECLINE_FULL_PATCHTST_BENCHMARK
+    status: CLOSED
+
+trend_tie_rule_conflict_resolution:
+  proposed_phase2i_draft:
+    positive_trend: "Trend63_t >= 0"
+    negative_trend: "Trend63_t < 0"
+  frozen_experiment_spec_v1_1:
+    positive_trend: "Trend63_t > 0"
+    negative_trend: "Trend63_t <= 0"
+  decision: PRESERVE_FROZEN_EXPERIMENT_SPEC_V1_1
+  exact_zero_label: negative_trend
+  experiment_spec_amendment_created: false
+  resolved_before_regime_labeling: true
+  resolved_before_regime_metrics: true
+  regime_results_observed_before_resolution: false
+  data_dependent_methodology_change: false
+
+scientific_purpose:
+  core_question: >-
+    Do learned forecasting models lose relative advantage against a simple
+    zero-return persistence baseline under market-condition shifts?
+  primary_focus:
+    - baseline_relative_mae_skill
+    - mae_skill_degradation_across_regimes
+    - disagreement_between_regression_error_and_directional_accuracy
+    - concentration_of_descriptive_failures_by_market_condition
+  regime_role: post_prediction_evaluation_dimension_only
+  causal_economic_claims: prohibited
+  trading_or_profitability_claims: prohibited
+  performance_based_methodology_changes: prohibited
+  regime_outcomes_may_modify_models: false
+  model_results_may_redefine_regimes: false
+
+models:
+  primary:
+    - persistence_baseline
+    - lightgbm
+    - lstm_seed_mean
+  diagnostic:
+    - lstm_per_seed
+  lstm_seeds:
+    - 1729
+    - 2718
+    - 31415
+  excluded:
+    patchtst:
+      status: CLOSED
+      reason: full_benchmark_authorization_declined_in_phase_2h_c
+      pilot_validation_predictions_allowed_in_regime_analysis: false
+
+label_contract:
+  source_assets:
+    - SPY
+  source_asset_policy: SPY_only
+  target_assets:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - NVDA
+  label_attachment_key: origin_date
+  partition_assignment_key: target_date
+  prediction_join_keys:
+    - fold
+    - origin_date
+  prediction_join_cardinality: many_prediction_rows_to_one_unique_regime_row
+  prediction_join_must_preserve_row_count: true
+  prediction_join_must_preserve_prediction_keys: true
+  missing_duplicate_or_extra_regime_keys: fail
+  intersection_join_to_hide_mismatch: prohibited
+  source_population_unit: one_unique_spy_observation_per_origin_date
+  duplicate_target_asset_rows_may_weight_thresholds: false
+  same_label_for_all_target_assets_models_and_seeds_on_fold_origin_date: true
+  asset_specific_regimes: prohibited
+  model_specific_regimes: prohibited
+  target_date_spy_information: prohibited
+  observable_information_cutoff: origin_date_inclusive
+  observed_session_calendar: SPY
+
+primary_regime_dimensions:
+  count: 3
+  order:
+    - trend
+    - volatility
+    - transition
+  additional_primary_dimensions_after_results: prohibited
+  dimensions_are_overlapping_views: true
+  joint_regime_cells_are_primary: false
+  prohibited_additions:
+    - RSI
+    - VIX
+    - macro
+    - news_or_sentiment
+    - sector
+    - earnings
+
+regimes:
+  trend:
+    output_column: trend_regime
+    source_quantity: Trend63_t
+    equivalent_existing_feature: spy_trend_63
+    formula: "log(SPY_close[t] / SPY_close[t-63 observed SPY sessions])"
+    fitted_threshold: none
+    labels:
+      positive_trend: "Trend63_t > 0"
+      negative_trend: "Trend63_t <= 0"
+    exact_zero_label: negative_trend
+    unavailable_history:
+      label: unavailable
+      exclude_from: trend_regime_analysis_only
+      eligible_for_other_dimensions_when_available: true
+      imputation: prohibited
+
+  volatility:
+    output_column: volatility_regime
+    source_quantity: RV21_t
+    formula: >-
+      population_std(SPY_log_return_1d over 21 observed SPY sessions ending at t,
+      ddof=0, min_periods=21) * sqrt(252)
+    equivalent_existing_feature: spy_volatility_21
+    existing_feature_is_annualized: false
+    standard_deviation_ddof: 0
+    window_observed_sessions: 21
+    minimum_periods: 21
+    annualization_factor: sqrt(252)
+    annualization_changes_median_classification: false
+    threshold:
+      statistic: median
+      finite_values_only: true
+      numeric_definition: average_of_two_middle_order_statistics_when_even
+      validation_history_partitions:
+        - train
+      development_test_history_partitions:
+        - train
+        - validation
+      future_f1_test_history_partitions:
+        - train
+        - validation
+      same_fold_evaluation_partition_in_threshold: prohibited
+    labels:
+      high_volatility: "RV21_t > fold_threshold"
+      low_volatility: "RV21_t <= fold_threshold"
+    equality_label: low_volatility
+    unavailable_history:
+      label: unavailable
+      exclude_from: volatility_regime_analysis_only
+      eligible_for_other_dimensions_when_available: true
+      imputation: prohibited
+
+  transition:
+    output_column: transition_regime
+    frozen_spec_category_aliases:
+      shifted: transition
+      stable_normal: stable
+    canonical_labels:
+      - transition
+      - stable
+    rv21_jump_ratio:
+      formula: "RV21_t / RV21_t_minus_21_observed_spy_sessions"
+      lag_observed_sessions: 21
+      threshold: 1.5
+      transition_predicate: "RV21_jump_ratio_t >= 1.5"
+      equality_label: transition
+      zero_unavailable_or_nonfinite_denominator:
+        ratio_condition: false
+        infinity_allowed: false
+      unavailable_or_nonfinite_numerator:
+        ratio_condition: false
+    absolute_return:
+      source_quantity: abs_spy_return_t
+      formula: "abs(SPY_log_return_1d_t)"
+      threshold:
+        statistic: quantile
+        probability: 0.95
+        interpolation: linear
+        pandas_equivalent: "pandas.Series.quantile(0.95, interpolation='linear')"
+        finite_values_only: true
+        validation_history_partitions:
+          - train
+        development_test_history_partitions:
+          - train
+          - validation
+        future_f1_test_history_partitions:
+          - train
+          - validation
+        same_fold_evaluation_partition_in_threshold: prohibited
+      transition_predicate: "abs_spy_return_t > fold_threshold"
+      equality_triggers_transition: false
+    combination: logical_or
+    labels:
+      transition: "rv21_jump_ratio_condition OR absolute_return_condition"
+      stable: "NOT transition"
+    invalid_ratio_does_not_block_independent_absolute_return_condition: true
+    if_both_component_inputs_unavailable:
+      label: unavailable
+      imputation: prohibited
+
+missing_history:
+  exclusion_scope: corresponding_regime_dimension_only
+  global_prediction_row_deletion: prohibited
+  model_evaluation_eligibility_unchanged: true
+  forward_fill: prohibited
+  imputation: prohibited
+  invented_labels: prohibited
+  unavailable_counts_required: true
+
+threshold_estimation:
+  development_test:
+    evaluation_folds:
+      - D1
+      - D2
+      - D3
+      - D4
+      - D5
+    history_partitions:
+      - train
+      - validation
+    same_fold_only: true
+    same_fold_test_distribution: prohibited
+    pooled_d1_d5_test_distribution: prohibited
+    year_2025_distribution: prohibited
+  future_validation_if_needed:
+    history_partitions:
+      - train
+  future_f1_test:
+    status: LOCKED_NOT_EXECUTABLE_IN_PHASE_2I_OR_2J
+    history_partitions:
+      - train
+      - validation
+  finite_values_only: true
+  values_per_origin_date: 1
+  target_asset_duplication: prohibited
+
+folds:
+  partition_year_semantics: target_date_calendar_year
+  threshold_observation_timestamp: origin_date
+  observed_trading_sessions_only: true
+  D1:
+    train_target_date_range: ["2015-01-01", "2018-12-31"]
+    validation_target_date_range: ["2019-01-01", "2019-12-31"]
+    test_target_date_range: ["2020-01-01", "2020-12-31"]
+    development_test_threshold_history_target_date_range: ["2015-01-01", "2019-12-31"]
+  D2:
+    train_target_date_range: ["2015-01-01", "2019-12-31"]
+    validation_target_date_range: ["2020-01-01", "2020-12-31"]
+    test_target_date_range: ["2021-01-01", "2021-12-31"]
+    development_test_threshold_history_target_date_range: ["2015-01-01", "2020-12-31"]
+  D3:
+    train_target_date_range: ["2015-01-01", "2020-12-31"]
+    validation_target_date_range: ["2021-01-01", "2021-12-31"]
+    test_target_date_range: ["2022-01-01", "2022-12-31"]
+    development_test_threshold_history_target_date_range: ["2015-01-01", "2021-12-31"]
+  D4:
+    train_target_date_range: ["2015-01-01", "2021-12-31"]
+    validation_target_date_range: ["2022-01-01", "2022-12-31"]
+    test_target_date_range: ["2023-01-01", "2023-12-31"]
+    development_test_threshold_history_target_date_range: ["2015-01-01", "2022-12-31"]
+  D5:
+    train_target_date_range: ["2015-01-01", "2022-12-31"]
+    validation_target_date_range: ["2023-01-01", "2023-12-31"]
+    test_target_date_range: ["2024-01-01", "2024-12-31"]
+    development_test_threshold_history_target_date_range: ["2015-01-01", "2023-12-31"]
+
+sample_size:
+  cell_keys:
+    - model
+    - fold
+    - asset
+    - seed_status_where_applicable
+    - regime_dimension
+    - regime_value
+  minimum_headline_rows: 30
+  low_n_predicate: "n < 30"
+  reportable_predicate: "n >= 30"
+  low_n_behavior:
+    status: descriptive_low_n
+    report_count: true
+    retain_metric_in_audit_or_descriptive_output: permitted
+    headline_comparison_eligible: false
+  reportable_status: reportable
+  lstm_per_seed_diagnostic_requires_minimum_per_seed: true
+  lstm_seed_mean_headline_requires_each_seed_cell_reportable: true
+  macro_headline_requires_all_four_assets_reportable_for_both_compared_values: true
+  threshold_may_be_lowered_after_results: false
+
+metrics:
+  learned_model_cell_metrics:
+    - mae
+    - rmse
+    - directional_accuracy
+    - positive_direction_class_balance
+    - matched_baseline_mae
+    - mae_skill
+    - matched_direction_persistence_da
+    - da_difference
+  baseline_cell_metrics:
+    - mae
+    - rmse
+    - directional_accuracy
+    - positive_direction_class_balance
+  exact_reference_match_keys:
+    - fold
+    - asset
+    - origin_date
+    - target_date
+  reference_match_cardinality: one_to_one
+  actual_log_return_must_match: true
+  actual_direction_must_match: true
+  missing_duplicate_or_extra_reference_keys: fail
+  intersection_only_matching: prohibited
+  mae_skill:
+    formula: "1 - mae_model / mae_baseline"
+    reference: zero_return_persistence
+    exact_same_keys_required: true
+    zero_baseline_mae_status: undefined
+    baseline_against_itself: not_a_meaningful_learned_model_statistic
+  da_difference:
+    formula: "da_model - da_direction_persistence"
+    reference: direction_persistence
+    exact_same_keys_required: true
+  prohibited:
+    - trading_profit
+    - pnl
+    - sharpe_ratio
+    - return_simulation
+    - portfolio_backtest
+    - transaction_cost_model
+    - causal_effect_metric
+
+primary_comparisons:
+  transition_stress:
+    stressed: transition
+    reference: stable
+    mae_skill_degradation: "mae_skill_transition - mae_skill_stable"
+  volatility_stress:
+    stressed: high_volatility
+    reference: low_volatility
+    mae_skill_degradation: "mae_skill_high_volatility - mae_skill_low_volatility"
+  trend_stress:
+    stressed: negative_trend
+    reference: positive_trend
+    mae_skill_degradation: "mae_skill_negative_trend - mae_skill_positive_trend"
+  negative_mae_skill_degradation_interpretation: worse_baseline_relative_skill_in_stressed_regime
+  sign_reversal_after_results: prohibited
+  raw_degradation_required_alongside_skill_degradation: true
+  generic_raw_degradation:
+    mae: "mae_stressed - mae_reference"
+    rmse: "rmse_stressed - rmse_reference"
+    directional_accuracy: "da_stressed - da_reference"
+    directional_stability_loss: "da_reference - da_stressed"
+
+lstm_seed_handling:
+  seeds:
+    - 1729
+    - 2718
+    - 31415
+  average_row_level_predictions: false
+  compute_cell_metrics_separately_per_seed: true
+  primary_value: arithmetic_mean_of_seed_metric_values
+  summary_statistics:
+    - arithmetic_mean
+    - population_std
+    - minimum
+    - maximum
+  population_std_ddof: 0
+  seed_dispersion_role: diagnostic
+  best_seed_selection: prohibited
+  seed_ensemble: prohibited
+
+macro_aggregation:
+  asset_order:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - NVDA
+  weighting: equal_asset_weight
+  row_count_weighting: prohibited
+  required_reportable_assets: 4
+  mae_skill: arithmetic_mean_of_four_asset_level_mae_skill_values
+  ratio_of_macro_model_mae_to_macro_baseline_mae: prohibited
+  lstm_order:
+    - compute_per_seed_asset_metrics
+    - compute_equal_weight_four_asset_macro_per_seed
+    - summarize_macro_metric_values_across_seeds
+
+cross_fold_summary:
+  folds:
+    - D1
+    - D2
+    - D3
+    - D4
+    - D5
+  input_unit: one_reportable_value_per_fold
+  statistics:
+    - median
+    - q1
+    - q3
+    - iqr
+    - minimum
+    - maximum
+  q1_probability: 0.25
+  q3_probability: 0.75
+  quantile_interpolation: linear
+  incomplete_fold_series:
+    headline_summary_eligible: false
+    report_available_values_and_count_descriptively: permitted
+  confidence_interval_language: prohibited
+  iid_daily_row_tests: prohibited
+  formal_inference: outside_scope_unless_separately_preregistered
+
+interpretation_boundaries:
+  descriptive_association_language: allowed
+  regime_caused_model_failure: prohibited
+  strategy_profitability_claims: prohibited
+  trade_through_regime_shift_claims: prohibited
+  f1_confirmation_claims_before_authorized_f1_execution: prohibited
+
+development_final_boundary:
+  phase2j_scope: D1_D5_development_test_only
+  phase2j_allowed_test_years:
+    - 2020
+    - 2021
+    - 2022
+    - 2023
+    - 2024
+  phase2j_f1_2025_access: prohibited
+  create_2025_placeholders_now: prohibited
+  accurate_phase2i_statement: >-
+    F1/2025 performance has not been evaluated, inspected, or used for model
+    selection, methodology selection, or scientific conclusions. Phase 2I
+    performs no new F1/2025 access.
+  historical_row_materialization_denial: prohibited
+  future_f1:
+    separately_authorized_execution_required: true
+    threshold_history_partitions:
+      - train
+      - validation
+    methodology_changes_based_on_f1_results: prohibited
+    frozen_model_protocols_required: true
+    same_metrics_and_suppression_rules_required: true
+    separate_development_and_final_reporting: true
+
+artifact_policy:
+  phase2i_allowed_outputs:
+    - docs/REGIME_PREREGISTRATION.md
+    - configs/regime_analysis.yaml
+    - PHASE_2I_REPORT.md
+  actual_regime_label_artifact_in_phase2i: prohibited
+  actual_regime_metric_artifact_in_phase2i: prohibited
+  modify_baseline_artifacts: prohibited
+  modify_lightgbm_artifacts: prohibited
+  modify_lstm_artifacts: prohibited
+  modify_combined_artifacts: prohibited
+  modify_patchtst_pilot_artifacts: prohibited
+  modify_patchtst_authorization_artifacts: prohibited
+  amend_experiment_specification: prohibited

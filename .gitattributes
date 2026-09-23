@@ -1,0 +1,2 @@
+# Preserve the byte-exact files covered by PUBLIC_FILES.sha256.
+* -text

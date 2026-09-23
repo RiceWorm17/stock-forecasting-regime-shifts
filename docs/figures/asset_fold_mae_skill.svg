@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 1120 735">
+<title id="title">Asset/fold MAE Skill</title>
+<desc id="desc">Two zero-centered heat maps show MAE Skill for four assets and five folds for LightGBM and the three-seed LSTM metric mean.</desc>
+<style>
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033}
+.title{font-size:27px;font-weight:700}.subtitle{font-size:15px;fill:#5D6678}
+.axis{font-size:13px;fill:#5D6678}.label{font-size:14px}.small{font-size:12px;fill:#5D6678}
+.value{font-size:12px;font-weight:650}.panel{font-size:17px;font-weight:700}
+</style>
+<rect width="1120" height="735" fill="#FFFFFF"/>
+<text x="56.00" y="48.00" class="title" text-anchor="start">Asset/fold MAE Skill</text>
+<text x="56.00" y="76.00" class="subtitle" text-anchor="start">Cell labels are percentage points; blue is positive and orange is negative</text>
+<text x="104.00" y="121.00" class="panel" text-anchor="start">LightGBM</text>
+<text x="145.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D1</text>
+<text x="227.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D2</text>
+<text x="309.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D3</text>
+<text x="391.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D4</text>
+<text x="473.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D5</text>
+<text x="90.00" y="206.00" class="axis" text-anchor="end" font-weight="650">AAPL</text>
+<rect x="104.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#DDECF5" opacity="1.000" stroke="#FFFFFF"/>
+<text x="143.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.29%</text>
+<rect x="186.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#F9E9DD" opacity="1.000" stroke="#FFFFFF"/>
+<text x="225.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-0.34%</text>
+<rect x="268.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#F1CAAC" opacity="1.000" stroke="#FFFFFF"/>
+<text x="307.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-4.79%</text>
+<rect x="350.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#D9EAF3" opacity="1.000" stroke="#FFFFFF"/>
+<text x="389.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.68%</text>
+<rect x="432.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#DBEBF4" opacity="1.000" stroke="#FFFFFF"/>
+<text x="471.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.48%</text>
+<text x="90.00" y="278.00" class="axis" text-anchor="end" font-weight="650">MSFT</text>
+<rect x="104.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#DFEDF5" opacity="1.000" stroke="#FFFFFF"/>
+<text x="143.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.11%</text>
+<rect x="186.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#F9E7D9" opacity="1.000" stroke="#FFFFFF"/>
+<text x="225.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-0.66%</text>
+<rect x="268.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#F8E5D6" opacity="1.000" stroke="#FFFFFF"/>
+<text x="307.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-0.92%</text>
+<rect x="350.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#DAEBF4" opacity="1.000" stroke="#FFFFFF"/>
+<text x="389.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.57%</text>
+<rect x="432.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#F8E5D5" opacity="1.000" stroke="#FFFFFF"/>
+<text x="471.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-1.00%</text>
+<text x="90.00" y="350.00" class="axis" text-anchor="end" font-weight="650">GOOGL</text>
+<rect x="104.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#D7E9F3" opacity="1.000" stroke="#FFFFFF"/>
+<text x="143.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.82%</text>
+<rect x="186.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#D1E6F1" opacity="1.000" stroke="#FFFFFF"/>
+<text x="225.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+1.38%</text>
+<rect x="268.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#F8E3D3" opacity="1.000" stroke="#FFFFFF"/>
+<text x="307.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-1.26%</text>
+<rect x="350.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#DCECF4" opacity="1.000" stroke="#FFFFFF"/>
+<text x="389.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.42%</text>
+<rect x="432.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#C6E0EE" opacity="1.000" stroke="#FFFFFF"/>
+<text x="471.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+2.38%</text>
+<text x="90.00" y="422.00" class="axis" text-anchor="end" font-weight="650">NVDA</text>
+<rect x="104.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#D4E7F2" opacity="1.000" stroke="#FFFFFF"/>
+<text x="143.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+1.14%</text>
+<rect x="186.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#F8E3D3" opacity="1.000" stroke="#FFFFFF"/>
+<text x="225.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-1.20%</text>
+<rect x="268.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#FAEADE" opacity="1.000" stroke="#FFFFFF"/>
+<text x="307.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-0.17%</text>
+<rect x="350.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#D4E7F2" opacity="1.000" stroke="#FFFFFF"/>
+<text x="389.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+1.09%</text>
+<rect x="432.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#D8EAF3" opacity="1.000" stroke="#FFFFFF"/>
+<text x="471.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.72%</text>
+<text x="590.00" y="121.00" class="panel" text-anchor="start">LSTM (3-seed metric mean)</text>
+<text x="631.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D1</text>
+<text x="713.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D2</text>
+<text x="795.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D3</text>
+<text x="877.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D4</text>
+<text x="959.00" y="151.00" class="axis" text-anchor="middle" font-weight="650">D5</text>
+<text x="576.00" y="206.00" class="axis" text-anchor="end" font-weight="650">AAPL</text>
+<rect x="590.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#F6DCC7" opacity="1.000" stroke="#FFFFFF"/>
+<text x="629.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-2.30%</text>
+<rect x="672.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#F5DAC4" opacity="1.000" stroke="#FFFFFF"/>
+<text x="711.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-2.60%</text>
+<rect x="754.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#EFC19D" opacity="1.000" stroke="#FFFFFF"/>
+<text x="793.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-6.10%</text>
+<rect x="836.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#F4D5BD" opacity="1.000" stroke="#FFFFFF"/>
+<text x="875.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-3.20%</text>
+<rect x="918.00" y="165.00" width="79.00" height="69.00" rx="3.00" fill="#F5D8C2" opacity="1.000" stroke="#FFFFFF"/>
+<text x="957.50" y="206.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-2.81%</text>
+<text x="576.00" y="278.00" class="axis" text-anchor="end" font-weight="650">MSFT</text>
+<rect x="590.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#D96E1A" opacity="1.000" stroke="#FFFFFF"/>
+<text x="629.50" y="278.00" class="value" text-anchor="middle" fill="#FFFFFF" style="fill:#FFFFFF">-18.08%</text>
+<rect x="672.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#F1C8A8" opacity="1.000" stroke="#FFFFFF"/>
+<text x="711.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-5.12%</text>
+<rect x="754.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#E7A470" opacity="1.000" stroke="#FFFFFF"/>
+<text x="793.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-10.25%</text>
+<rect x="836.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#F9E6D8" opacity="1.000" stroke="#FFFFFF"/>
+<text x="875.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-0.75%</text>
+<rect x="918.00" y="237.00" width="79.00" height="69.00" rx="3.00" fill="#EFC4A1" opacity="1.000" stroke="#FFFFFF"/>
+<text x="957.50" y="278.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-5.78%</text>
+<text x="576.00" y="350.00" class="axis" text-anchor="end" font-weight="650">GOOGL</text>
+<rect x="590.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#EBB488" opacity="1.000" stroke="#FFFFFF"/>
+<text x="629.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-8.05%</text>
+<rect x="672.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#D7E9F3" opacity="1.000" stroke="#FFFFFF"/>
+<text x="711.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.90%</text>
+<rect x="754.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#F4D4BB" opacity="1.000" stroke="#FFFFFF"/>
+<text x="793.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-3.36%</text>
+<rect x="836.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#DEEDF5" opacity="1.000" stroke="#FFFFFF"/>
+<text x="875.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.22%</text>
+<rect x="918.00" y="309.00" width="79.00" height="69.00" rx="3.00" fill="#FAEBDF" opacity="1.000" stroke="#FFFFFF"/>
+<text x="957.50" y="350.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-0.17%</text>
+<text x="576.00" y="422.00" class="axis" text-anchor="end" font-weight="650">NVDA</text>
+<rect x="590.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#D1E6F1" opacity="1.000" stroke="#FFFFFF"/>
+<text x="629.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+1.40%</text>
+<rect x="672.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#F5D8C2" opacity="1.000" stroke="#FFFFFF"/>
+<text x="711.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-2.79%</text>
+<rect x="754.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#F4D4BB" opacity="1.000" stroke="#FFFFFF"/>
+<text x="793.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-3.37%</text>
+<rect x="836.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#F1CAAB" opacity="1.000" stroke="#FFFFFF"/>
+<text x="875.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">-4.81%</text>
+<rect x="918.00" y="381.00" width="79.00" height="69.00" rx="3.00" fill="#E0EEF6" opacity="1.000" stroke="#FFFFFF"/>
+<text x="957.50" y="422.00" class="value" text-anchor="middle" fill="#172033" style="fill:#172033">+0.05%</text>
+<rect x="362.00" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#D96E1A" opacity="1.000"/>
+<rect x="365.95" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DA711E" opacity="1.000"/>
+<rect x="369.90" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DB7322" opacity="1.000"/>
+<rect x="373.85" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DB7626" opacity="1.000"/>
+<rect x="377.80" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DC782A" opacity="1.000"/>
+<rect x="381.75" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DD7B2E" opacity="1.000"/>
+<rect x="385.70" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DD7D32" opacity="1.000"/>
+<rect x="389.65" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DE8036" opacity="1.000"/>
+<rect x="393.60" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DE823A" opacity="1.000"/>
+<rect x="397.55" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DF853E" opacity="1.000"/>
+<rect x="401.50" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E08742" opacity="1.000"/>
+<rect x="405.45" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E08A46" opacity="1.000"/>
+<rect x="409.40" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E18D4A" opacity="1.000"/>
+<rect x="413.35" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E28F4E" opacity="1.000"/>
+<rect x="417.30" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E29252" opacity="1.000"/>
+<rect x="421.25" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E39456" opacity="1.000"/>
+<rect x="425.20" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E4975A" opacity="1.000"/>
+<rect x="429.15" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E4995E" opacity="1.000"/>
+<rect x="433.10" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E59C62" opacity="1.000"/>
+<rect x="437.05" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E69E66" opacity="1.000"/>
+<rect x="441.00" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E6A16A" opacity="1.000"/>
+<rect x="444.95" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E7A36E" opacity="1.000"/>
+<rect x="448.90" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E8A672" opacity="1.000"/>
+<rect x="452.85" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E8A876" opacity="1.000"/>
+<rect x="456.80" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#E9AB7A" opacity="1.000"/>
+<rect x="460.75" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EAAE7E" opacity="1.000"/>
+<rect x="464.70" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EAB082" opacity="1.000"/>
+<rect x="468.65" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EBB386" opacity="1.000"/>
+<rect x="472.60" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#ECB58A" opacity="1.000"/>
+<rect x="476.55" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#ECB88E" opacity="1.000"/>
+<rect x="480.50" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EDBA92" opacity="1.000"/>
+<rect x="484.45" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EEBD96" opacity="1.000"/>
+<rect x="488.40" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EEBF9A" opacity="1.000"/>
+<rect x="492.35" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#EFC29E" opacity="1.000"/>
+<rect x="496.30" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F0C4A2" opacity="1.000"/>
+<rect x="500.25" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F0C7A6" opacity="1.000"/>
+<rect x="504.20" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F1C9AA" opacity="1.000"/>
+<rect x="508.15" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F2CCAE" opacity="1.000"/>
+<rect x="512.10" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F2CFB2" opacity="1.000"/>
+<rect x="516.05" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F3D1B6" opacity="1.000"/>
+<rect x="520.00" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F4D4BA" opacity="1.000"/>
+<rect x="523.95" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F4D6BE" opacity="1.000"/>
+<rect x="527.90" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F5D9C2" opacity="1.000"/>
+<rect x="531.85" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F6DBC6" opacity="1.000"/>
+<rect x="535.80" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F6DECA" opacity="1.000"/>
+<rect x="539.75" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F7E0CE" opacity="1.000"/>
+<rect x="543.70" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F8E3D2" opacity="1.000"/>
+<rect x="547.65" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F8E5D6" opacity="1.000"/>
+<rect x="551.60" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#F9E8DA" opacity="1.000"/>
+<rect x="555.55" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#FAEADE" opacity="1.000"/>
+<rect x="559.50" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DEEDF5" opacity="1.000"/>
+<rect x="563.45" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#DAEBF4" opacity="1.000"/>
+<rect x="567.40" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#D6E9F3" opacity="1.000"/>
+<rect x="571.35" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#D2E6F2" opacity="1.000"/>
+<rect x="575.30" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#CEE4F0" opacity="1.000"/>
+<rect x="579.25" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#CAE2EF" opacity="1.000"/>
+<rect x="583.20" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#C6E0EE" opacity="1.000"/>
+<rect x="587.15" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#C2DDED" opacity="1.000"/>
+<rect x="591.10" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#BEDBEB" opacity="1.000"/>
+<rect x="595.05" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#BAD9EA" opacity="1.000"/>
+<rect x="599.00" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#B6D7E9" opacity="1.000"/>
+<rect x="602.95" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#B2D5E8" opacity="1.000"/>
+<rect x="606.90" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#AED2E7" opacity="1.000"/>
+<rect x="610.85" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#AAD0E5" opacity="1.000"/>
+<rect x="614.80" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#A6CEE4" opacity="1.000"/>
+<rect x="618.75" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#A2CCE3" opacity="1.000"/>
+<rect x="622.70" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#9EC9E2" opacity="1.000"/>
+<rect x="626.65" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#9AC7E1" opacity="1.000"/>
+<rect x="630.60" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#96C5DF" opacity="1.000"/>
+<rect x="634.55" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#92C3DE" opacity="1.000"/>
+<rect x="638.50" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#8EC1DD" opacity="1.000"/>
+<rect x="642.45" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#8ABEDC" opacity="1.000"/>
+<rect x="646.40" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#86BCDA" opacity="1.000"/>
+<rect x="650.35" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#82BAD9" opacity="1.000"/>
+<rect x="654.30" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#7EB8D8" opacity="1.000"/>
+<rect x="658.25" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#7AB5D7" opacity="1.000"/>
+<rect x="662.20" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#76B3D6" opacity="1.000"/>
+<rect x="666.15" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#72B1D4" opacity="1.000"/>
+<rect x="670.10" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#6EAFD3" opacity="1.000"/>
+<rect x="674.05" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#6AADD2" opacity="1.000"/>
+<rect x="678.00" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#66AAD1" opacity="1.000"/>
+<rect x="681.95" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#62A8D0" opacity="1.000"/>
+<rect x="685.90" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#5EA6CE" opacity="1.000"/>
+<rect x="689.85" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#5AA4CD" opacity="1.000"/>
+<rect x="693.80" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#56A1CC" opacity="1.000"/>
+<rect x="697.75" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#529FCB" opacity="1.000"/>
+<rect x="701.70" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#4E9DC9" opacity="1.000"/>
+<rect x="705.65" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#4A9BC8" opacity="1.000"/>
+<rect x="709.60" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#4699C7" opacity="1.000"/>
+<rect x="713.55" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#4296C6" opacity="1.000"/>
+<rect x="717.50" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#3E94C5" opacity="1.000"/>
+<rect x="721.45" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#3A92C3" opacity="1.000"/>
+<rect x="725.40" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#3690C2" opacity="1.000"/>
+<rect x="729.35" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#328DC1" opacity="1.000"/>
+<rect x="733.30" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#2E8BC0" opacity="1.000"/>
+<rect x="737.25" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#2A89BF" opacity="1.000"/>
+<rect x="741.20" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#2687BD" opacity="1.000"/>
+<rect x="745.15" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#2285BC" opacity="1.000"/>
+<rect x="749.10" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#1E82BB" opacity="1.000"/>
+<rect x="753.05" y="507.00" width="4.45" height="15.00" rx="0.00" fill="#1A80BA" opacity="1.000"/>
+<line x1="559.50" y1="505.00" x2="559.50" y2="525.00" stroke="#172033" stroke-width="1"/>
+<text x="362.00" y="542.00" class="small" text-anchor="start">-18.1%</text>
+<text x="559.50" y="542.00" class="small" text-anchor="middle">0%</text>
+<text x="757.00" y="542.00" class="small" text-anchor="end">+18.1%</text>
+<text x="56.00" y="592.00" class="small" text-anchor="start">LightGBM: positive skill in 12/20 cells.  LSTM: negative skill in 16/20 cells.</text>
+<text x="56.00" y="615.00" class="small" text-anchor="start">LSTM metrics were computed by seed and then averaged; predictions were not ensembled and no best seed was chosen.</text>
+<text x="56.00" y="638.00" class="small" text-anchor="start">A shared color scale preserves cross-model comparability; exact labels remain visible for small effects.</text>
+<text x="56.00" y="661.00" class="small" text-anchor="start">Descriptive results for this frozen protocol; not a universal model ranking.</text>
+<text x="56.00" y="697.00" class="small" text-anchor="start">Source: results/combined/development_asset_fold_comparison_61ad31f5e745338ccf679be9614188bab869964b350ab4f32a26067f85a2f3a1.csv</text>
+</svg>

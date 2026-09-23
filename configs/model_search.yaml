@@ -1,0 +1,615 @@
+schema_version: 1
+artifact_type: learned_model_preregistration
+status: FROZEN_BEFORE_LEARNED_MODEL_TRAINING
+frozen_on: "2026-09-14"
+experiment_specification:
+  version: "1.1"
+  path: docs/EXPERIMENT_SPEC.md
+data_contract:
+  raw_dataset_sha256: 55f74f058493102387f1c2d0a848bd673a3cfa0473d617dfdb34aea8a94f7736
+  processed_dataset_sha256: 9352da6b434011f9844ef0acc1813ea33dce39152712752bba21a3005aabf7be
+  existing_feature_values_mutable: false
+  target_definition_mutable: false
+
+prediction_task:
+  primary_task: regression
+  target_column: target_log_return
+  target_definition: next_observed_trading_session_asset_local_log_return
+  forecast_horizon_observed_sessions: 1
+  target_keys:
+    - asset
+    - origin_date
+    - target_date
+  raw_price_prediction: prohibited
+  secondary_direction:
+    mode: derived_from_regression_forecast
+    output_column: predicted_direction
+    rule: "1 if predicted_log_return > 0 else 0"
+    separate_classifier: prohibited
+
+assets:
+  target_assets:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - NVDA
+  market_reference: SPY
+  market_reference_is_prediction_target: false
+  modeling_policy:
+    fitted_models: one_separate_regression_model_per_target_asset
+    pooled_multi_asset_model: prohibited
+    candidate_space_shared_across_assets: true
+    feature_definitions_shared_across_assets: true
+    fold_schedule_shared_across_assets: true
+    evaluation_rules_shared_across_assets: true
+
+features:
+  count: 17
+  columns:
+    - asset_log_return_1d
+    - asset_log_return_lag_1
+    - asset_return_mean_5
+    - asset_return_std_5
+    - asset_volume_mean_5
+    - asset_volume_std_5
+    - asset_return_mean_21
+    - asset_return_std_21
+    - asset_volume_mean_21
+    - asset_volume_std_21
+    - spy_log_return_1d
+    - spy_log_return_lag_1
+    - spy_return_mean_5
+    - spy_volatility_5
+    - spy_return_mean_21
+    - spy_volatility_21
+    - spy_trend_63
+  excluded_predictive_columns:
+    - asset
+    - origin_date
+    - target_date
+    - target_log_return
+    - target_direction
+    - spy_observed
+    - core_evaluation_eligible
+  additional_predictive_features_allowed: false
+  regime_labels_are_predictive_features: false
+  eligibility:
+    filter_column: core_evaluation_eligible
+    required_filter_value: true
+    require_all_features_finite: true
+    use_target_or_performance_to_determine_eligibility: false
+    headline_test_keys_must_equal_phase_2c_canonical_keys: true
+    mismatch_action: fail_hard
+
+walk_forward:
+  registry_path: configs/walk_forward.yaml
+  partition_key: target_date
+  candidate_space_scope: global_and_frozen
+  candidate_scores_scope: fold_local
+  winner_scope: model_family_and_fold
+  winner_shared_across_assets_within_fold: true
+  fitted_asset_models_remain_separate: true
+  later_folds_may_influence_earlier_selection: false
+  update_model_parameters_inside_test_year: false
+  development_folds:
+    D1:
+      train: {start: "2015-01-01", end: "2018-12-31"}
+      validation: {start: "2019-01-01", end: "2019-12-31"}
+      test: {start: "2020-01-01", end: "2020-12-31"}
+    D2:
+      train: {start: "2015-01-01", end: "2019-12-31"}
+      validation: {start: "2020-01-01", end: "2020-12-31"}
+      test: {start: "2021-01-01", end: "2021-12-31"}
+    D3:
+      train: {start: "2015-01-01", end: "2020-12-31"}
+      validation: {start: "2021-01-01", end: "2021-12-31"}
+      test: {start: "2022-01-01", end: "2022-12-31"}
+    D4:
+      train: {start: "2015-01-01", end: "2021-12-31"}
+      validation: {start: "2022-01-01", end: "2022-12-31"}
+      test: {start: "2023-01-01", end: "2023-12-31"}
+    D5:
+      train: {start: "2015-01-01", end: "2022-12-31"}
+      validation: {start: "2023-01-01", end: "2023-12-31"}
+      test: {start: "2024-01-01", end: "2024-12-31"}
+  final_test:
+    fold: F1
+    train: {start: "2015-01-01", end: "2023-12-31"}
+    validation: {start: "2024-01-01", end: "2024-12-31"}
+    test: {start: "2025-01-01", end: "2025-12-31"}
+    status: LOCKED_UNTOUCHED
+    execute_during_model_development: false
+    inspect_2025_performance_during_model_development: false
+    generate_2025_learned_predictions_during_model_development: false
+    allow_2025_metrics_or_performance_artifacts_during_model_development: false
+    fit_or_select_f1_candidates_during_d1_d5_development: false
+    use_2024_as_f1_validation_during_d1_d5_development: false
+    reuse_d5_winner_for_f1: false
+    use_d1_d5_aggregate_tests_to_select_f1: false
+    unlock_only_under_experiment_specification_final_test_procedure: true
+
+candidate_selection:
+  unit: model_family_and_fold
+  procedure:
+    - fit_one_separate_model_per_asset_on_training_partition_only
+    - evaluate_each_asset_on_that_fold_validation_partition
+    - compute_validation_mae_separately_per_asset
+    - aggregate_equal_weight_across_aapl_msft_googl_nvda
+    - select_one_shared_winning_structural_configuration_for_the_fold
+  primary_statistic: equal_weight_macro_validation_mae
+  asset_weights:
+    AAPL: 0.25
+    MSFT: 0.25
+    GOOGL: 0.25
+    NVDA: 0.25
+  optimization_direction: minimize
+  prohibited_selection_inputs:
+    - test_mae
+    - test_rmse
+    - test_directional_accuracy
+    - aggregate_d1_d5_test_results
+    - f1_results
+    - regime_performance
+  candidate_completeness:
+    require_every_asset_validation_slice: true
+    require_every_lstm_seed_validation_slice: true
+    require_identical_validation_keys_across_family_candidates_and_seeds: true
+    require_finite_predictions_and_metrics: true
+    missing_extra_or_duplicate_keys: fail_hard
+    incomplete_grid_action: stop_without_selecting_winner
+    intersect_or_selectively_omit_rows: prohibited
+  tie_breaking:
+    practical_tie_expression: "abs(candidate_macro_validation_mae - best_macro_validation_mae) <= tolerance"
+    tolerance: 0.00001
+    ordered_rules:
+      - simpler_or_lower_compute_candidate
+      - lower_equal_weight_macro_validation_rmse
+      - ascending_lexical_config_id
+    family_simplicity_rules:
+      lightgbm: fewer_num_leaves_then_larger_min_child_samples
+      lstm: shorter_context_length
+    family_simplicity_order:
+      lightgbm:
+        - LGBM_03
+        - LGBM_01
+        - LGBM_04
+        - LGBM_02
+      lstm:
+        - LSTM_21
+        - LSTM_63
+
+lightgbm:
+  required: true
+  framework: LightGBM
+  framework_major_version: 4
+  estimator: LGBMRegressor
+  prediction_artifact_model_value: lightgbm
+  task: regression
+  models_per_asset: 1
+  input_scaling: none
+  fixed_parameters:
+    objective: regression_l1
+    metric: l1
+    learning_rate: 0.03
+    max_estimators: 1000
+    feature_fraction: 1.0
+    bagging_fraction: 1.0
+    bagging_freq: 0
+    lambda_l2: 1.0
+    verbosity: -1
+    deterministic: true
+    force_col_wise: true
+    n_jobs: 1
+    random_seed: 1729
+  implementation_mapping:
+    max_estimators_lgbmregressor_argument: n_estimators
+    sklearn_random_state: 1729
+    alternate_or_subordinate_seed_values: prohibited
+    deterministic_and_force_col_wise_requirement: where_supported
+    unlisted_parameter_policy: defaults_of_exact_locked_lightgbm_4x_patch
+  early_stopping:
+    enabled_for_candidate_fit: true
+    validation_partition_only: true
+    monitor: validation_l1
+    sole_eval_set: asset_validation_partition
+    rounds: 50
+    direction: minimize
+    callback: "lightgbm.early_stopping(stopping_rounds=50, first_metric_only=True, verbose=False, min_delta=0.0)"
+    best_iteration_numbering: one_based_positive
+    best_iteration_bounds_inclusive: [1, 1000]
+    if_stopping_callback_does_not_trigger: use_lightgbm_recorded_best_validation_l1_iteration
+    record_best_iteration_by:
+      - fold
+      - candidate
+      - asset
+  candidates:
+    - config_id: LGBM_01
+      num_leaves: 15
+      min_child_samples: 20
+    - config_id: LGBM_02
+      num_leaves: 31
+      min_child_samples: 20
+    - config_id: LGBM_03
+      num_leaves: 15
+      min_child_samples: 50
+    - config_id: LGBM_04
+      num_leaves: 31
+      min_child_samples: 50
+  candidate_count: 4
+  candidate_fit:
+    fitted_rows: training_partition_only
+    validation_use: early_stopping_and_candidate_scoring_only
+    test_use: prohibited
+  winning_candidate_refit:
+    rows: combined_training_and_validation
+    fresh_model: true
+    per_asset_iteration_count: asset_specific_best_iteration_from_winning_candidate_train_validation_fit
+    n_estimators_argument: asset_specific_best_iteration_from_winning_candidate_train_validation_fit
+    early_stopping: false
+    eval_set: none
+    callbacks: none
+    test_used_for_stopping_or_refit: false
+    parameters_frozen_for_entire_test_year: true
+    model_updates_inside_test_year: false
+  artifact_seed: 1729
+
+lstm:
+  required: true
+  framework: PyTorch
+  task: regression
+  prediction_artifact_model_value: lstm
+  models_per_asset_per_seed: 1
+  winning_refit_models_per_asset_per_fold: 3
+  architecture:
+    input_feature_count: 17
+    batch_first: true
+    recurrent_layer: LSTM
+    hidden_size: 32
+    num_layers: 1
+    bidirectional: false
+    recurrent_dropout: 0.0
+    post_lstm_dropout: 0.20
+    dropout_location: after_lstm_output_before_linear
+    sequence_representation: final_timestep_lstm_output
+    dropout_enabled_during_fit_only: true
+    output_layer: linear
+    output_size: 1
+    attention: false
+    stacked_lstm: false
+    architecture_expansion_allowed: false
+    tensor_and_model_dtype: float32
+    hidden_and_cell_state: zero_reset_for_each_independent_sequence_batch
+    state_carried_across_samples_or_batches: false
+  optimization:
+    optimizer: Adam
+    learning_rate: 0.001
+    adam_betas: [0.9, 0.999]
+    adam_eps: 0.00000001
+    adam_weight_decay: 0.0
+    adam_amsgrad: false
+    loss: L1Loss
+    loss_metric: mae
+    batch_size: 64
+    max_epochs: 60
+    gradient_clip_norm: 1.0
+    shuffle_training_sequences: false
+    drop_last_training_batch: false
+    data_loader_num_workers: 0
+    target_scaling: none
+  early_stopping:
+    enabled_for_candidate_fit: true
+    monitor: validation_mae
+    direction: minimize
+    patience_epochs: 8
+    min_delta: 0.00001
+    improvement_rule: "candidate_validation_mae < tracked_best_validation_mae - min_delta"
+    stop_rule: stop_after_eight_consecutive_completed_epochs_without_improvement_or_after_epoch_60
+    validation_mae_aggregation: arithmetic_mean_of_absolute_error_over_individual_rows_not_unweighted_batch_means
+    nonfinite_loss_prediction_or_metric: failed_run
+    restore_best_validation_epoch: true
+    best_epoch_numbering: one_based
+    record_best_epoch_by:
+      - fold
+      - candidate
+      - asset
+      - seed
+  candidates:
+    - config_id: LSTM_21
+      context_length_sessions: 21
+    - config_id: LSTM_63
+      context_length_sessions: 63
+  candidate_count: 2
+  seeds:
+    - 1729
+    - 2718
+    - 31415
+  seed_count: 3
+  seed_policy:
+    run_every_seed_for_every_candidate_fold_asset: true
+    remove_seed_for_poor_performance: prohibited
+    choose_best_seed: prohibited
+    ensemble_predictions: false
+    selection_aggregation_order:
+      - compute_validation_mae_per_seed_per_asset
+      - mean_across_three_seeds_within_each_asset
+      - equal_weight_mean_across_four_assets
+    tie_break_rmse_aggregation_order:
+      - compute_validation_rmse_per_seed_per_asset
+      - mean_across_three_seeds_within_each_asset
+      - equal_weight_mean_across_four_assets
+    retain_prediction_rows_for_each_seed: true
+  preprocessing:
+    method: per_feature_standardization
+    implementation_target: sklearn.preprocessing.StandardScaler
+    statistics:
+      center: arithmetic_mean
+      scale: population_standard_deviation
+      standard_deviation_ddof: 0
+    candidate_selection_fit_rows: training_feature_rows_only_per_asset_and_fold
+    fit_statistic_row_counting: each_unique_canonical_feature_row_once_not_repeated_sequence_occurrences
+    transform_during_candidate_selection:
+      - training_sequences
+      - validation_sequences
+    validation_or_test_statistics_used_during_candidate_selection: false
+    winning_refit_fit_rows: combined_training_and_validation_feature_rows_per_asset
+    winning_refit_row_counting: each_unique_canonical_feature_row_once_not_repeated_sequence_occurrences
+    test_transform_uses_frozen_refit_scaler_only: true
+    save_refitted_scaler: true
+    target_standardization: false
+    zero_variance_feature_policy:
+      retain_feature: true
+      scale_value: 1.0
+      drop_feature: false
+  sequences:
+    asset_local: true
+    timestamp_aware: true
+    chronological_sort_key:
+      - asset
+      - origin_date
+    context_includes_origin_date: true
+    sequence_interval: "the context_length asset-local observed feature rows ending at origin_date t"
+    consecutive_asset_local_observed_sessions_required: true
+    delete_or_compress_intervening_observed_session_gaps: prohibited
+    target_relation: "target_log_return for the asset's next observed trading session after origin_date t"
+    all_elements_observable_at_or_before_sequence_timestamp: true
+    require_all_context_features_finite: true
+    cross_asset_boundaries: prohibited
+    construct_by_raw_dataframe_position_across_tickers: prohibited
+    target_values_as_inputs: prohibited
+    future_context: prohibited
+    reset_at_calendar_year_or_partition_boundary: false
+    preceding_partition_feature_context_for_validation: allowed
+    preceding_train_or_validation_feature_context_for_test: allowed
+    earlier_observed_test_period_feature_context_for_later_test_origins: allowed
+    validation_or_test_targets_as_context_or_fit_inputs: prohibited
+    partition_membership_determined_by: target_date
+    validation_endpoint_coverage:
+      all_eligible_keys_constructible: required
+      identical_across_context_candidates_and_seeds: required
+      mismatch_action: fail_hard
+    training_context_warmup:
+      incomplete_early_endpoints_may_be_omitted: true
+      record_endpoint_count_per_candidate: true
+      equalize_by_padding_duplication_or_deleting_valid_rows: prohibited
+  candidate_fit:
+    model_fit_rows: training_partition_targets_only
+    scaler_fit_rows: training_partition_feature_rows_only
+    validation_use: early_stopping_and_candidate_scoring_only
+    test_use: prohibited
+  winning_candidate_refit:
+    rows: combined_training_and_validation
+    scaler_rows: combined_training_and_validation_feature_rows
+    fresh_model_for_each_seed: true
+    reuse_same_seed: true
+    exact_epoch_count: previously_recorded_best_epoch_for_same_fold_winning_candidate_asset_seed
+    early_stopping: false
+    test_used_for_stopping_or_refit: false
+    parameters_frozen_for_entire_test_year: true
+    model_updates_inside_test_year: false
+    record_chosen_epoch_for_every_model: true
+  determinism:
+    attempt_deterministic_behavior_where_supported: true
+    seed_python: true
+    seed_numpy: true
+    seed_pytorch_cpu: true
+    seed_cuda_if_used: true
+    request_deterministic_algorithms_where_practical: true
+    cpu_execution_supported: true
+    gpu_allowed_but_not_required: true
+    record_device: true
+    record_package_versions: true
+    record_strict_determinism_achieved: true
+    seed_failure_policy:
+      retry_exact_same_seed_once: true
+      replacement_seed_allowed: false
+      persistent_failure_action: mark_incomplete_and_stop_benchmark
+
+resource_budget:
+  expansion_after_results_inspection: prohibited
+  infeasible_compute_action: stop_and_document_resource_constraint
+  lightgbm:
+    candidates: 4
+    development_folds: 5
+    assets: 4
+    seeds_per_fit: 1
+    maximum_candidate_fits: 80
+    winning_refits: 20
+    maximum_total_fits_including_refits: 100
+  lstm:
+    candidates: 2
+    seeds: 3
+    development_folds: 5
+    assets: 4
+    maximum_candidate_fits: 120
+    winning_refits: 60
+    maximum_total_fits_including_refits: 180
+    maximum_epochs_per_candidate_fit: 60
+  prohibited_budget_reductions:
+    - remove_weak_seeds
+    - reduce_only_poorly_performing_folds
+    - alter_candidates
+    - skip_assets
+
+metrics:
+  selection:
+    primary: mae
+    required_secondary:
+      - rmse
+  development_test:
+    regression:
+      - mae
+      - rmse
+    direction:
+      - directional_accuracy
+    baseline_relative:
+      - mae_skill
+  direction_class_balance_reporting_required: true
+  mae_skill:
+    formula: "1 - mae_model / mae_zero_return_persistence_baseline"
+    baseline_component: zero_return
+    canonical_baseline:
+      path: results/baselines/predictions/baseline_predictions_e09e4909e9af7b7836c5e0b2c8d7b320d2848d5da9b33b8c9492421e0a108bb4.csv
+      sha256: e09e4909e9af7b7836c5e0b2c8d7b320d2848d5da9b33b8c9492421e0a108bb4
+      run_id: phase2c_dev_9352da6b4340
+      model: zero_return__direction_persistence
+      model_config_id: zero_return__direction_persistence_v1
+    matched_observation_keys:
+      - fold
+      - asset
+      - origin_date
+      - target_date
+    baseline_zero_denominator_result: undefined
+    exact_one_to_one_key_match_required: true
+    identical_actual_log_return_and_actual_direction_required: true
+    duplicate_missing_or_extra_key_action: fail_hard
+    intersection_to_shrink_comparison: prohibited
+    macro_aggregation: arithmetic_mean_of_four_asset_level_mae_skill_values_not_ratio_of_macro_maes
+  directional_comparison:
+    baseline_component: direction_persistence
+    formula: "directional_accuracy_model - directional_accuracy_direction_persistence"
+    name: da_difference
+    exact_same_rows_required: true
+    actual_class_balance: fraction_of_rows_with_actual_direction_equal_to_1
+  reporting_levels:
+    - per_asset
+    - per_fold
+    - equal_weight_macro_across_assets
+  development_fold_summary:
+    center: median_across_d1_d5
+    dispersion: interquartile_range_across_d1_d5
+    interpretation: descriptive_variability_not_formal_uncertainty
+  lstm_reporting:
+    metrics_computed_per_seed_first: true
+    report_each_seed: true
+    report_mean_across_three_seeds: true
+    report_descriptive_seed_dispersion: true
+    seed_summary_statistics:
+      - arithmetic_mean
+      - population_standard_deviation_ddof_0
+      - minimum
+      - maximum
+    average_predictions_across_seeds: false
+  mase:
+    included: false
+    status: requires_separate_future_preregistration_of_training_history_denominator
+
+prediction_artifact_contract:
+  canonical_field_count: 18
+  canonical_fields:
+    - run_id
+    - spec_version
+    - data_version
+    - model
+    - model_config_id
+    - seed
+    - fold
+    - partition
+    - asset
+    - origin_date
+    - target_date
+    - actual_log_return
+    - predicted_log_return
+    - actual_direction
+    - predicted_direction
+    - trend_regime
+    - volatility_regime
+    - transition_regime
+  predicted_direction_rule: "1 if predicted_log_return > 0 else 0"
+  seed_values:
+    lightgbm:
+      - 1729
+    lstm:
+      - 1729
+      - 2718
+      - 31415
+  lstm_seed_rows_retained_separately: true
+  lstm_seed_ensembling: prohibited
+  regime_placeholders:
+    fields:
+      - trend_regime
+      - volatility_regime
+      - transition_regime
+    value: not_labeled_pre_regime_analysis
+    existing_phase_2c_baseline_value: not_labeled_phase2c
+    both_values_mean_unlabeled_not_regime_categories: true
+    overwrite_frozen_prediction_artifacts_during_later_labeling: prohibited
+    later_regime_join_requires_new_traceable_versioned_artifact: true
+    use_for_training: false
+    use_for_candidate_selection: false
+    label_during_learned_model_development: false
+
+regime_analysis:
+  status: deferred_to_dedicated_regime_analysis_phase
+  pre_regime_learned_model_gate:
+    assert_sentinel_fields_only: true
+    assert_regime_unused_by_preprocessing_training_selection_and_metrics: true
+  causal_threshold_leakage_tests_required_before_any_real_regime_label_join_or_analysis: true
+  phase_2d_claims_thresholds_already_implemented_or_tested: false
+  condition_training_on_regime: false
+  select_hyperparameters_by_regime: false
+  inspect_candidate_regime_performance: false
+  modify_features_from_regime_results: false
+
+patchtst:
+  status: CLOSED
+  preregistered: false
+  implemented: false
+  dependencies_allowed_now: false
+  candidate_space: null
+  gate_may_be_considered_only_after:
+    - lightgbm_complete
+    - lstm_complete
+    - both_pipelines_reproducible
+    - d1_d5_development_results_exist
+    - compute_feasibility_assessed
+  if_gate_opens: freeze_candidate_space_before_first_run
+
+dependency_plan:
+  install_during_phase_2d: false
+  planned:
+    lightgbm_phase:
+      - "lightgbm>=4,<5"
+    lstm_phase:
+      - "torch>=2,<3"
+      - "scikit-learn>=1.4,<2"
+  prohibited:
+    - tensorflow
+    - transformers
+    - patchtst_dependencies
+
+execution_environment:
+  install_or_change_during_phase_2d: false
+  before_first_family_fit:
+    lock_exact_python_and_package_versions: true
+    record_platform: true
+    record_device_policy: true
+  one_device_policy_per_family_run: true
+  selectively_mix_cpu_and_gpu_based_on_performance: prohibited
+
+change_control:
+  candidate_spaces_frozen_before_first_learned_model_run: true
+  change_tie_tolerance_after_results: prohibited
+  add_candidates_after_training_starts: prohibited
+  remove_seeds_after_training_starts: prohibited
+  material_post_result_changes: new_exploratory_specification_only
+  silently_replace_preregistered_benchmark: prohibited

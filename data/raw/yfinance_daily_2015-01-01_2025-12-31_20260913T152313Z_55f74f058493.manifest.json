@@ -1,0 +1,47 @@
+{
+  "adjustment_setting": {
+    "auto_adjust": true
+  },
+  "canonical_file": "yfinance_daily_2015-01-01_2025-12-31_20260913T152313Z_55f74f058493.csv",
+  "file_sha256": "55f74f058493102387f1c2d0a848bd673a3cfa0473d617dfdb34aea8a94f7736",
+  "frequency": "daily",
+  "provider": "yfinance",
+  "provider_library_version": "1.7.0",
+  "requested_range": {
+    "end_inclusive": "2025-12-31",
+    "provider_end_exclusive": "2026-01-01",
+    "start_inclusive": "2015-01-01"
+  },
+  "retrieval_timestamp_utc": "2026-09-13T15:23:13.748022Z",
+  "returned_range_by_asset": {
+    "AAPL": {
+      "end": "2025-12-31",
+      "start": "2015-01-02"
+    },
+    "GOOGL": {
+      "end": "2025-12-31",
+      "start": "2015-01-02"
+    },
+    "MSFT": {
+      "end": "2025-12-31",
+      "start": "2015-01-02"
+    },
+    "NVDA": {
+      "end": "2025-12-31",
+      "start": "2015-01-02"
+    },
+    "SPY": {
+      "end": "2025-12-31",
+      "start": "2015-01-02"
+    }
+  },
+  "row_count_by_asset": {
+    "AAPL": 2766,
+    "GOOGL": 2766,
+    "MSFT": 2766,
+    "NVDA": 2766,
+    "SPY": 2766
+  },
+  "schema_version": 1,
+  "timezone": "America/New_York"
+}

@@ -1,0 +1,589 @@
+schema_version: 1
+artifact_type: patchtst_preregistration
+status: FROZEN_BEFORE_FIRST_PATCHTST_FIT
+frozen_on: "2026-09-15"
+
+authorization:
+  phase: PHASE_2H_A
+  purpose: preregistration_only
+  authorizes_later_bounded_pilot: true
+  authorizes_implementation_now: false
+  authorizes_training_now: false
+  authorizes_pilot_now: false
+  authorizes_full_d1_d5_benchmark: false
+  full_benchmark_requires_separate_authorization_after_pilot: true
+
+provenance:
+  experiment_specification:
+    path: docs/EXPERIMENT_SPEC.md
+    version: "1.1"
+    sha256: 4a29b96a7c826634d2dede63220c378737c0e545a7e733491a0a7002d69fc5b9
+  data_contract:
+    path: docs/DATA_CONTRACT.md
+    sha256: 838cbcb2419a14fe413c3b93036b5daa29a97c6f338b52dcc07376116ed2263d
+  learned_model_preregistration:
+    path: docs/MODEL_PREREGISTRATION.md
+    sha256: be04b9ce8457c5b26a8042f548eccce8ddb4b5d1b86a1404a43ef1bb1a52d613
+  phase2g_report:
+    path: PHASE_2G_REPORT.md
+    sha256: e745662a3a8a8a8497348e2480e821a44ab4b55d7ff16721e3f42067db607667
+  phase2g_gate:
+    path: results/combined/patchtst_gate_decision_b46fb9ca62675417594a69fab761792370a867fbb9ba8979eb8928e45230cfb7.json
+    sha256: b46fb9ca62675417594a69fab761792370a867fbb9ba8979eb8928e45230cfb7
+    decision: ADMIT_PATCHTST_TO_A_PREREGISTERED_PILOT
+    gates:
+      G1: PASS
+      G2: PASS
+      G3: PASS
+      G4: PASS
+      G5: PASS
+      G6: PASS
+      G7: PASS
+  data_versions:
+    raw_dataset_sha256: 55f74f058493102387f1c2d0a848bd673a3cfa0473d617dfdb34aea8a94f7736
+    processed_dataset_sha256: 9352da6b434011f9844ef0acc1813ea33dce39152712752bba21a3005aabf7be
+  frozen_artifact_trees:
+    baseline:
+      file_count: 6
+      sha256: 1f42bb6758b54251060983e1b7a9323861d94ac768ee5371571e77e5b46fc466
+    lightgbm:
+      file_count: 113
+      sha256: 6f1079692067a8ed49dcce3d3db52efd22e00883084575a3a804a6f942e9d970
+    lstm:
+      file_count: 235
+      sha256: 64d0866469259062e49652c17be364e34cde6bbe7fecc17dbb821489e6b66f61
+    combined_phase2g:
+      file_count: 9
+      sha256: c0dc9928c7f9381bf0980d6ccd4552d1bd053d41456a19b1c992fb66a2d63be2
+
+scientific_role:
+  inclusion_reason: methodological_diversity
+  scientific_question: >-
+    Does a patch-based, channel-independent temporal encoder provide meaningfully
+    different forecasting behavior from zero-return persistence, tabular LightGBM,
+    and recurrent LSTM under the same causal feature, target, fold, and evaluation
+    contract?
+  expected_superiority_claimed: false
+  prohibited_rationales:
+    - lightgbm_performed_poorly
+    - lstm_performed_poorly
+    - project_needs_a_model_that_beats_baseline
+    - transformer_is_assumed_superior
+
+prediction_task:
+  primary_task: regression
+  target_column: target_log_return
+  target_definition: next_observed_trading_session_asset_local_log_return
+  forecast_horizon_observed_sessions: 1
+  input_tensor_layout: [batch, context_length, 17]
+  output_tensor_layout: [batch]
+  output_dtype: float32
+  target_scaling: none
+  secondary_direction:
+    output_column: predicted_direction
+    rule: "1 if predicted_log_return > 0 else 0"
+    separate_classifier: prohibited
+
+assets:
+  target_assets:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - NVDA
+  market_reference: SPY
+  market_reference_is_prediction_target: false
+  model_policy: one_separate_model_per_target_asset
+  pooled_multi_stock_training: prohibited
+
+features:
+  count: 17
+  order:
+    - asset_log_return_1d
+    - asset_log_return_lag_1
+    - asset_return_mean_5
+    - asset_return_std_5
+    - asset_volume_mean_5
+    - asset_volume_std_5
+    - asset_return_mean_21
+    - asset_return_std_21
+    - asset_volume_mean_21
+    - asset_volume_std_21
+    - spy_log_return_1d
+    - spy_log_return_lag_1
+    - spy_return_mean_5
+    - spy_volatility_5
+    - spy_return_mean_21
+    - spy_volatility_21
+    - spy_trend_63
+  additional_features_allowed: false
+  specifically_prohibited:
+    - RSI
+    - MACD
+    - Bollinger_Bands
+    - fundamentals
+    - news
+    - sentiment
+    - macro_data
+  regime_labels_are_features: false
+  mutate_after_pilot_results: prohibited
+
+model:
+  family: patchtst
+  documentation_name: PatchTST-style channel-independent patch Transformer
+  implementation: small_custom_pytorch
+  external_forecasting_framework: none
+  defining_properties:
+    temporal_patching: true
+    channel_independent_patch_encoding: true
+    patch_projection_shared_across_channels: true
+    transformer_encoder_shared_across_channels: true
+    positional_information_across_patch_positions: true
+    cross_channel_combination_location: final_scalar_head_only
+  conceptual_flow:
+    - transpose_time_features_to_feature_channels
+    - extract_right_aligned_temporal_patches_per_channel
+    - apply_shared_linear_patch_embedding
+    - add_learned_patch_position_embedding
+    - apply_shared_transformer_encoder_channel_independently
+    - restore_batch_channel_patch_embedding_axes
+    - flatten_in_channel_patch_embedding_order
+    - apply_head_dropout
+    - apply_scalar_linear_regression_head
+  not_claimed: byte_for_byte_external_library_reproduction
+
+patching:
+  alignment: right
+  padding: none
+  future_information: prohibited
+  patch_length: 16
+  stride: 8
+  final_patch_end_index_formula: context_length_minus_1
+  final_patch_start_index_formula: context_length_minus_patch_length
+  start_generation: >-
+    Begin at context_length - patch_length, repeatedly subtract stride while the
+    start is nonnegative, then reverse the starts into chronological order.
+  patch_count_formula: "1 + floor((context_length - patch_length) / stride)"
+  uncovered_early_context_rows: allowed
+  final_patch_must_include_origin_timestep: true
+  naive_left_aligned_unfold_that_omits_origin: prohibited
+
+architecture:
+  input_channels: 17
+  patch_projection:
+    type: linear
+    in_features: 16
+    out_features: 32
+    bias: true
+    shared_across_channels: true
+  positional_embedding:
+    type: learned
+    shape: [1, number_of_patches, 32]
+    initialization: zeros
+    shared_across_channels: true
+  transformer_encoder:
+    d_model: 32
+    n_heads: 4
+    layers: 2
+    feedforward_dimension: 64
+    dropout: 0.10
+    activation: GELU
+    batch_first: true
+    norm_first: true
+    layer_norm_eps: 0.00001
+    final_encoder_layer_norm: true
+    weights_shared_across_channels: true
+  head:
+    pooling: none
+    attention_pooling: false
+    flatten_order: channel_then_chronological_patch_then_embedding_dimension
+    input_dimension_formula: "17 * number_of_patches * 32"
+    dropout: 0.10
+    output_layer: linear
+    output_size: 1
+  dtype: float32
+  revin: false
+  alternate_head_search: false
+  architecture_search: false
+
+candidates:
+  count: 2
+  values:
+    - config_id: PATCHTST_63
+      context_length: 63
+      patch_count: 6
+      chronological_patch_start_indices: [7, 15, 23, 31, 39, 47]
+      final_patch_end_index: 62
+      uncovered_prefix_timesteps: 7
+      head_input_dimension: 3264
+    - config_id: PATCHTST_126
+      context_length: 126
+      patch_count: 14
+      chronological_patch_start_indices: [6, 14, 22, 30, 38, 46, 54, 62, 70, 78, 86, 94, 102, 110]
+      final_patch_end_index: 125
+      uncovered_prefix_timesteps: 6
+      head_input_dimension: 7616
+  additional_contexts_allowed: false
+  searched_fields: []
+  prohibited_searches:
+    - architecture
+    - patch_length
+    - stride
+    - d_model
+    - n_heads
+    - transformer_layers
+    - feedforward_dimension
+    - pooling_or_head
+
+preprocessing:
+  input_features_only: true
+  target_standardization: false
+  method: per_feature_standardization
+  implementation_target: sklearn.preprocessing.StandardScaler
+  candidate_stage:
+    unit: fold_x_asset
+    fit_rows: training_feature_rows_only
+    scaler_shared_across_context_candidates: true
+    scaler_shared_across_seeds: true
+    each_canonical_feature_row_counted_once: true
+    repeated_patch_appearances_counted_in_moments: false
+    validation_statistics_allowed: false
+    test_statistics_allowed: false
+  statistics:
+    mean: arithmetic_mean
+    variance: population
+    ddof: 0
+  zero_variance_policy:
+    retain_feature: true
+    center_feature: true
+    effective_scale: 1.0
+  future_full_refit:
+    allowed_only_after_pilot_and_separate_authorization: true
+    fit_rows: train_plus_validation_feature_rows_only
+    test_statistics_allowed: false
+
+sequences:
+  asset_local: true
+  chronological: true
+  explicit_keys: [asset, origin_date, target_date]
+  context_ends_at_origin_date: true
+  target_relation: next_observed_asset_session_after_origin_date
+  target_as_input: prohibited
+  future_features: prohibited
+  padding: none
+  require_all_17_features_finite: true
+  cross_asset_sequences: prohibited
+  validation_context_may_use_prior_training_features: true
+  validation_targets_used_for_training_or_preprocessing: false
+  candidate_validation_endpoint_keys_must_match: true
+  endpoint_key_match_scope: each_asset_across_both_contexts_and_both_pilot_seeds
+  intersection_workaround: prohibited
+
+training:
+  loss:
+    implementation: torch.nn.L1Loss
+    reduction: mean
+  optimizer:
+    implementation: torch.optim.AdamW
+    learning_rate: 0.001
+    betas: [0.9, 0.999]
+    eps: 0.00000001
+    weight_decay: 0.0001
+    amsgrad: false
+  batch_size: 64
+  max_epochs: 40
+  shuffle: false
+  drop_last: false
+  num_workers: 0
+  gradient_clip_norm: 1.0
+  scheduler: none
+  warmup_scheduler: none
+  learning_rate_search: false
+  early_stopping:
+    enabled: true
+    monitor: validation_mae_over_individual_rows
+    direction: minimize
+    min_delta: 0.00001
+    improvement_rule: "candidate_validation_mae < tracked_best_validation_mae - min_delta"
+    patience_completed_epochs: 6
+    restore_best_state: true
+    best_epoch_numbering: one_based
+    unweighted_mean_of_batch_losses: prohibited
+  nonfinite_loss_prediction_or_metric: pilot_failure
+
+determinism:
+  reference_device: cpu
+  gpu_rescue_if_cpu_gate_fails: prohibited
+  deterministic_pytorch_where_supported: true
+  seed_python: true
+  seed_numpy: true
+  seed_pytorch_cpu: true
+  pytorch_intra_op_threads: 1
+  pytorch_inter_op_threads: 1
+  set_inter_op_threads_once_at_process_start: true
+  change_hardware_or_threads_based_on_performance: prohibited
+  exact_reference_environment:
+    python: 3.12.14
+    torch: 2.14.0+cpu
+    numpy: 2.5.3
+    pandas: 3.0.5
+    scikit_learn: 1.9.1
+    pyyaml: 6.0.3
+    cuda_available: false
+  capture_environment_manifest_before_first_fit: true
+
+pilot:
+  phase: PHASE_2H_B
+  authorization_required: separate
+  fold: D1
+  training_target_dates:
+    start: "2015-01-01"
+    end: "2018-12-31"
+  validation_target_dates:
+    start: "2019-01-01"
+    end: "2019-12-31"
+  allowed_partitions: [train, validation]
+  prohibited_partitions: [test]
+  d1_test_2020_access: prohibited
+  d2_d5_validation_or_test_access: prohibited
+  f1_2025_access: prohibited
+  development_test_predictions: prohibited
+  seeds: [1729, 2718]
+  excluded_full_seed: 31415
+  seed_removal_or_replacement_based_on_pilot: prohibited
+  grid:
+    contexts: 2
+    seeds: 2
+    assets: 4
+    candidate_fits: 16
+    expected_formula: "2 * 2 * 4"
+    require_complete_grid: true
+    refits: 0
+    test_predictions: 0
+    winner_test_evaluations: 0
+  deterministic_replay:
+    required_by_gate: P5
+    configuration: PATCHTST_63
+    asset: AAPL
+    seed: 1729
+    fresh_repeated_execution: true
+    candidate_grid_fit_budget_accounting: excluded_non_candidate_verification_replay
+    total_training_executions_including_replay: 17
+    included_in_pilot_wall_time: true
+    produces_candidate_selection_evidence: false
+  outputs_per_candidate_asset_seed:
+    - validation_mae
+    - validation_rmse
+    - validation_directional_accuracy
+    - actual_positive_rate
+    - best_epoch
+    - epochs_run
+    - runtime_seconds
+    - warning_status_and_messages
+    - error_status_and_messages
+  performance_may_change_frozen_choices: false
+  hyperparameter_search_phase: false
+
+pilot_acceptance_gate:
+  rule: all_P1_through_P7_must_pass
+  allowed_statuses: [PASS, FAIL]
+  predictive_performance_thresholds: []
+  predictive_performance_used_for_acceptance: false
+  criteria:
+    P1:
+      name: Integrity
+      pass_if: >-
+        Frozen data, historical config, model preregistration, Phase 2G gate,
+        Phase 2H-A preregistration, and recorded artifact hashes are unchanged.
+    P2:
+      name: Complete_grid
+      pass_if: >-
+        All 16 of 16 candidate-grid fits complete for both contexts, both pilot
+        seeds, and all four assets; no required slice is missing.
+    P3:
+      name: Numerical_validity
+      pass_if: >-
+        Every loss, prediction, and required metric is finite and no reproducible
+        training failure remains.
+    P4:
+      name: Exact_validation_coverage
+      pass_if: >-
+        Both contexts and both seeds have exactly the same canonical D1 validation
+        keys within every asset, with no intersection or shrinkage.
+    P5:
+      name: Deterministic_reproducibility
+      repeated_configuration: PATCHTST_63
+      repeated_asset: AAPL
+      repeated_seed: 1729
+      prediction_comparison: numpy_allclose
+      prediction_rtol: 0.0000001
+      prediction_atol: 0.000000001
+      metric_comparison: numpy_allclose
+      metric_rtol: 0.0000001
+      metric_atol: 0.000000001
+      exact_fields:
+        - canonical_validation_keys
+        - best_epoch
+        - epochs_run
+      pass_if: >-
+        The fresh replay reproduces canonical validation keys and discrete training
+        outcomes exactly, and predictions plus MAE/RMSE/DA within the frozen tolerances.
+    P6:
+      name: Resource_feasibility
+      pilot_wall_time_cap_seconds: 1800
+      measured_scope: >-
+        Entire pilot command, including 16 candidate-grid fits, the P5 replay,
+        validation, verification, artifact writes, and runner overhead.
+      peak_process_memory_bytes: record_where_practical
+      memory_measurement_unavailable_policy: document_without_automatic_failure
+      pass_if: measured_total_pilot_wall_time_seconds_lte_1800
+    P7:
+      name: Full_benchmark_feasibility_estimate
+      candidate_fits: 120
+      refits: 60
+      total_fits: 180
+      safety_factor: 1.25
+      formula: "(pilot_total_seconds / 16) * 180 * 1.25"
+      full_runtime_cap_seconds: 21600
+      pass_if: estimated_full_seconds_lte_21600
+
+no_performance_gate:
+  required: true
+  validation_metrics_recorded_for_technical_visibility: true
+  weak_validation_performance_allowed: true
+  pilot_must_not_be_required_to:
+    - beat_zero_return_persistence
+    - beat_lightgbm
+    - beat_lstm
+    - achieve_positive_mae_skill
+    - achieve_any_directional_accuracy_threshold
+  rationale: performance_based_go_no_go_would_be_model_shopping
+
+pilot_failure_policy:
+  any_P1_P7_failure_result: PILOT_NOT_PASSED
+  admit_to_full_benchmark: false
+  continue_project_without_patchtst: true
+  failed_pilot_is_project_failure: false
+  post_failure_changes_prohibited:
+    - shrink_model
+    - remove_context
+    - remove_asset
+    - remove_seed
+    - increase_wall_time_limit
+    - increase_full_runtime_limit
+    - change_optimizer
+    - change_architecture
+    - change_resource_gate
+
+future_full_benchmark:
+  authorized_now: false
+  requires_pilot_all_P1_P7_pass: true
+  requires_separate_post_pilot_authorization: true
+  folds: [D1, D2, D3, D4, D5]
+  contexts: [PATCHTST_63, PATCHTST_126]
+  seeds: [1729, 2718, 31415]
+  assets: [AAPL, MSFT, GOOGL, NVDA]
+  candidate_fit_count: 120
+  winning_refit_count: 60
+  maximum_total_fits: 180
+  add_or_remove_seed_after_pilot: prohibited
+  select_best_seed: prohibited
+  ensemble_seeds: prohibited
+  candidate_selection:
+    scope: independently_within_each_fold
+    aggregation_order:
+      - compute_validation_mae_per_seed_per_asset
+      - arithmetic_mean_across_three_seeds_within_each_asset
+      - equal_weight_arithmetic_mean_across_four_assets
+    winner: lowest_macro_validation_mae
+    practical_tie_tolerance: 0.00001
+    ordered_tie_breaks:
+      - shorter_context_PATCHTST_63_before_PATCHTST_126
+      - lower_macro_validation_rmse_using_same_seed_then_asset_aggregation
+      - ascending_lexical_config_id
+    prohibited_selection_inputs:
+      - development_test_metrics
+      - f1_results
+      - regime_performance
+  refit:
+    unit: fold_x_asset_x_seed
+    chosen_epoch_source: same_seed_same_asset_winning_context_candidate_best_epoch
+    fresh_model: true
+    scaler_fit_rows: train_plus_validation_features_only
+    training_rows: train_plus_validation
+    exact_epoch_count: chosen_epoch_source
+    early_stopping: false
+    test_eval_set: none
+    test_target_feedback: prohibited
+    parameters_fixed_for_entire_test_year: true
+  prediction_contract:
+    canonical_field_count: 18
+    fields:
+      - run_id
+      - spec_version
+      - data_version
+      - model
+      - model_config_id
+      - seed
+      - fold
+      - partition
+      - asset
+      - origin_date
+      - target_date
+      - actual_log_return
+      - predicted_log_return
+      - actual_direction
+      - predicted_direction
+      - trend_regime
+      - volatility_regime
+      - transition_regime
+    model_value: patchtst
+    partition_value: test
+    regime_placeholder: not_labeled_pre_regime_analysis
+    expected_development_keys_per_seed: 5032
+    no_f1_2025: true
+
+resource_budget:
+  pilot_candidate_fit_budget: 16
+  pilot_determinism_replay_excluded_from_candidate_grid_budget: 1
+  pilot_total_training_executions_including_replay: 17
+  pilot_max_epochs_per_fit: 40
+  pilot_wall_time_cap_seconds: 1800
+  future_full_candidate_fits: 120
+  future_full_refits: 60
+  future_full_total_fits: 180
+  full_runtime_safety_factor: 1.25
+  full_runtime_estimate_formula: "(pilot_total_seconds / 16) * 180 * 1.25"
+  full_runtime_cap_seconds: 21600
+  grid_expansion: prohibited
+  gpu_rescue: prohibited
+
+dependency_policy:
+  phase_2h_a_installs_nothing: true
+  preferred_future_environment: existing_frozen_pytorch_cpu_environment
+  custom_pytorch_implementation_first: true
+  prohibited_unless_pre_fit_amendment_after_demonstrated_impossibility:
+    - transformers
+    - neuralforecast
+    - tsai
+    - pytorch-forecasting
+    - tensorflow
+  dependency_change_after_observing_pilot_performance: prohibited
+
+scope_guards:
+  f1_2025_performance_access: prohibited
+  regime_analysis: prohibited
+  regime_labels_used_for_training_or_selection: false
+  regime_placeholder_before_later_join: not_labeled_pre_regime_analysis
+  alter_historical_baseline_lightgbm_lstm_or_combined_artifacts: prohibited
+  phase_2h_a_model_implementation: prohibited
+  phase_2h_a_training: prohibited
+
+change_control:
+  architecture_frozen_before_first_fit: true
+  contexts_frozen_before_first_fit: true
+  pilot_and_full_seeds_frozen_before_first_fit: true
+  training_budget_frozen_before_first_fit: true
+  pilot_fold_frozen_before_first_fit: true
+  pilot_acceptance_criteria_frozen_before_first_fit: true
+  performance_motivated_change_after_first_fit: prohibited
+  necessary_pre_fit_correction_requires_reviewed_preregistration_amendment: true

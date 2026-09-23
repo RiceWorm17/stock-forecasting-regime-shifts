@@ -1,0 +1,13 @@
+reporting_level,model,regime_dimension,total_contrasts,reportable_contrasts,descriptive_or_unavailable_contrasts,negative_degradation_count,zero_within_tolerance_count,positive_degradation_count,sign_tolerance,lstm_seed_sign_disagreement_count
+asset_fold,lightgbm,trend,20,12,8,2,0,10,9.9999999999999998e-13,0
+asset_fold,lightgbm,volatility,20,16,4,7,0,9,9.9999999999999998e-13,0
+asset_fold,lightgbm,transition,20,16,4,4,0,12,9.9999999999999998e-13,0
+asset_fold,lstm_seed_mean,trend,20,12,8,2,0,10,9.9999999999999998e-13,8
+asset_fold,lstm_seed_mean,volatility,20,16,4,9,0,7,9.9999999999999998e-13,9
+asset_fold,lstm_seed_mean,transition,20,16,4,8,0,8,9.9999999999999998e-13,6
+macro_fold,lightgbm,trend,5,3,2,0,0,3,9.9999999999999998e-13,0
+macro_fold,lightgbm,volatility,5,4,1,1,0,3,9.9999999999999998e-13,0
+macro_fold,lightgbm,transition,5,4,1,1,0,3,9.9999999999999998e-13,0
+macro_fold,lstm_seed_mean,trend,5,3,2,0,0,3,9.9999999999999998e-13,0
+macro_fold,lstm_seed_mean,volatility,5,4,1,3,0,1,9.9999999999999998e-13,1
+macro_fold,lstm_seed_mean,transition,5,4,1,2,0,2,9.9999999999999998e-13,2

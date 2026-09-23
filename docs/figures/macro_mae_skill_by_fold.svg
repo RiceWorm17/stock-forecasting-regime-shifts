@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 1120 690">
+<title id="title">Macro MAE Skill by development fold</title>
+<desc id="desc">Grouped bars compare LightGBM and the three-seed LSTM mean for folds D1 through D5. Positive skill favors the learned model over zero-return persistence.</desc>
+<style>
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033}
+.title{font-size:27px;font-weight:700}.subtitle{font-size:15px;fill:#5D6678}
+.axis{font-size:13px;fill:#5D6678}.label{font-size:14px}.small{font-size:12px;fill:#5D6678}
+.value{font-size:12px;font-weight:650}.panel{font-size:17px;font-weight:700}
+</style>
+<rect width="1120" height="690" fill="#FFFFFF"/>
+<text x="56.00" y="48.00" class="title" text-anchor="start">Macro MAE Skill by development fold</text>
+<text x="56.00" y="76.00" class="subtitle" text-anchor="start">Positive values favor the learned model over the zero-return persistence baseline</text>
+<line x1="118.00" y1="520.00" x2="1070.00" y2="520.00" stroke="#D9DEE8" stroke-width="1"/>
+<text x="106.00" y="524.00" class="axis" text-anchor="end">-8%</text>
+<line x1="118.00" y1="441.00" x2="1070.00" y2="441.00" stroke="#D9DEE8" stroke-width="1"/>
+<text x="106.00" y="445.00" class="axis" text-anchor="end">-6%</text>
+<line x1="118.00" y1="362.00" x2="1070.00" y2="362.00" stroke="#D9DEE8" stroke-width="1"/>
+<text x="106.00" y="366.00" class="axis" text-anchor="end">-4%</text>
+<line x1="118.00" y1="283.00" x2="1070.00" y2="283.00" stroke="#D9DEE8" stroke-width="1"/>
+<text x="106.00" y="287.00" class="axis" text-anchor="end">-2%</text>
+<line x1="118.00" y1="204.00" x2="1070.00" y2="204.00" stroke="#172033" stroke-width="2"/>
+<text x="106.00" y="208.00" class="axis" text-anchor="end">0%</text>
+<line x1="118.00" y1="125.00" x2="1070.00" y2="125.00" stroke="#D9DEE8" stroke-width="1"/>
+<text x="106.00" y="129.00" class="axis" text-anchor="end">2%</text>
+<text x="31.00" y="322.50" class="axis" text-anchor="middle" transform="rotate(-90.00 31.00 322.50)">MAE Skill</text>
+<rect x="155.20" y="180.74" width="54.00" height="23.26" rx="2.00" fill="#0072B2" opacity="1.000"/>
+<text x="182.20" y="172.74" class="value" text-anchor="middle" fill="#0072B2" style="fill:#0072B2">+0.59%</text>
+<rect x="217.20" y="204.00" width="54.00" height="266.88" rx="2.00" fill="#D55E00" opacity="1.000"/>
+<text x="244.20" y="488.88" class="value" text-anchor="middle" fill="#D55E00" style="fill:#D55E00">-6.76%</text>
+<text x="213.20" y="553.00" class="label" text-anchor="middle" font-weight="650">D1 (2020)</text>
+<text x="213.20" y="575.00" class="small" text-anchor="middle">n = 1,012</text>
+<rect x="345.60" y="204.00" width="54.00" height="7.99" rx="2.00" fill="#0072B2" opacity="1.000"/>
+<text x="372.60" y="229.99" class="value" text-anchor="middle" fill="#0072B2" style="fill:#0072B2">-0.20%</text>
+<rect x="407.60" y="204.00" width="54.00" height="94.95" rx="2.00" fill="#D55E00" opacity="1.000"/>
+<text x="434.60" y="316.95" class="value" text-anchor="middle" fill="#D55E00" style="fill:#D55E00">-2.40%</text>
+<text x="403.60" y="553.00" class="label" text-anchor="middle" font-weight="650">D2 (2021)</text>
+<text x="403.60" y="575.00" class="small" text-anchor="middle">n = 1,008</text>
+<rect x="536.00" y="204.00" width="54.00" height="70.56" rx="2.00" fill="#0072B2" opacity="1.000"/>
+<text x="563.00" y="292.56" class="value" text-anchor="middle" fill="#0072B2" style="fill:#0072B2">-1.79%</text>
+<rect x="598.00" y="204.00" width="54.00" height="227.97" rx="2.00" fill="#D55E00" opacity="1.000"/>
+<text x="625.00" y="449.97" class="value" text-anchor="middle" fill="#D55E00" style="fill:#D55E00">-5.77%</text>
+<text x="594.00" y="553.00" class="label" text-anchor="middle" font-weight="650">D3 (2022)</text>
+<text x="594.00" y="575.00" class="small" text-anchor="middle">n = 1,004</text>
+<rect x="726.40" y="176.69" width="54.00" height="27.31" rx="2.00" fill="#0072B2" opacity="1.000"/>
+<text x="753.40" y="168.69" class="value" text-anchor="middle" fill="#0072B2" style="fill:#0072B2">+0.69%</text>
+<rect x="788.40" y="204.00" width="54.00" height="84.27" rx="2.00" fill="#D55E00" opacity="1.000"/>
+<text x="815.40" y="306.27" class="value" text-anchor="middle" fill="#D55E00" style="fill:#D55E00">-2.13%</text>
+<text x="784.40" y="553.00" class="label" text-anchor="middle" font-weight="650">D4 (2023)</text>
+<text x="784.40" y="575.00" class="small" text-anchor="middle">n = 1,000</text>
+<rect x="916.80" y="178.46" width="54.00" height="25.54" rx="2.00" fill="#0072B2" opacity="1.000"/>
+<text x="943.80" y="170.46" class="value" text-anchor="middle" fill="#0072B2" style="fill:#0072B2">+0.65%</text>
+<rect x="978.80" y="204.00" width="54.00" height="86.01" rx="2.00" fill="#D55E00" opacity="1.000"/>
+<text x="1005.80" y="308.01" class="value" text-anchor="middle" fill="#D55E00" style="fill:#D55E00">-2.18%</text>
+<text x="974.80" y="553.00" class="label" text-anchor="middle" font-weight="650">D5 (2024)</text>
+<text x="974.80" y="575.00" class="small" text-anchor="middle">n = 1,008</text>
+<rect x="758.00" y="101.00" width="14.00" height="14.00" rx="2.00" fill="#0072B2" opacity="1.000"/>
+<text x="780.00" y="113.00" class="small" text-anchor="start">LightGBM</text>
+<rect x="875.00" y="101.00" width="14.00" height="14.00" rx="2.00" fill="#D55E00" opacity="1.000"/>
+<text x="897.00" y="113.00" class="small" text-anchor="start">LSTM (3-seed metric mean)</text>
+<text x="56.00" y="625.00" class="small" text-anchor="start">Equal-weight macro across AAPL, MSFT, GOOGL, and NVDA; exactly matched prediction keys.</text>
+<text x="56.00" y="647.00" class="small" text-anchor="start">Descriptive estimates only: no confidence intervals or significance tests were performed.</text>
+<text x="56.00" y="671.00" class="small" text-anchor="start">Source: results/combined/development_macro_fold_comparison_042b08dfe55c6449331f1ee5b9e8437a8540505c5061f61648d66c8d588203f6.csv</text>
+</svg>

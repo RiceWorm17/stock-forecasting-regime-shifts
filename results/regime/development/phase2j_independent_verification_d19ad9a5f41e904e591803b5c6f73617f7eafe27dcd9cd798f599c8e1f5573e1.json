@@ -1,0 +1,69 @@
+{
+  "artifact_type": "phase2j_independent_saved_file_verification",
+  "content_addressed_filename_hashes": "PASS",
+  "f1_2025_performance_evaluated": false,
+  "labeled_prediction_rows": {
+    "baseline": 5032,
+    "lightgbm": 5032,
+    "lstm": 15096
+  },
+  "labels": {
+    "d1_d5_only": true,
+    "post_2024_rows": 0,
+    "rows": 1258,
+    "tie_and_trigger_formulas_recomputed": true,
+    "unique_fold_origin": true
+  },
+  "lstm_seeds_unchanged": true,
+  "maximum_absolute_differences": {
+    "asset_fold_degradation": 0.0,
+    "baseline_regime_metrics": 0.0,
+    "cross_fold_summary": 0.0,
+    "directional_error_disagreement": 0.0,
+    "failure_pattern_summary": 0.0,
+    "labeled_baseline_predictions": 0.0,
+    "labeled_lightgbm_predictions": 0.0,
+    "labeled_lstm_predictions": 0.0,
+    "lightgbm_regime_metrics": 0.0,
+    "lstm_per_seed_regime_metrics": 0.0,
+    "lstm_seed_summary_regime_metrics": 0.0,
+    "macro_degradation": 0.0,
+    "macro_regime_metrics": 0.0,
+    "regime_label_counts": 0.0,
+    "threshold_audit": 0.0,
+    "unique_regime_labels": 0.0
+  },
+  "metric_layers_recomputed": [
+    "cell_metrics",
+    "exact_matched_baseline_metrics",
+    "mae_skill",
+    "da_difference",
+    "lstm_seed_summaries",
+    "asset_fold_degradation",
+    "macro_metrics",
+    "macro_degradation",
+    "cross_fold_summary",
+    "failure_patterns",
+    "directional_error_disagreement"
+  ],
+  "models_trained": false,
+  "new_f1_2025_scientific_access": false,
+  "non_regime_prediction_fields_unchanged": true,
+  "non_regime_prediction_maximum_absolute_differences": {
+    "baseline": 9.996344030316351e-17,
+    "lightgbm": 1.0061396160665481e-16,
+    "lstm": 1.0061396160665481e-16
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "strict_tolerance": 1e-12,
+  "thresholds": {
+    "fold_rows": 5,
+    "linear_q95_recomputed": true,
+    "median_recomputed": true,
+    "post_2024_rows_included": 0,
+    "same_fold_test_rows_included": 0
+  },
+  "verification_method": "fresh_disk_reload_fresh_development_source_projection_and_full_recalculation",
+  "verified_primary_artifact_count": 16
+}

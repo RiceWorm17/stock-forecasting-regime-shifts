@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editors and operating-system metadata
+.idea/
+.vscode/
+.DS_Store
+desktop.ini
+Thumbs.db
+
+# Temporary and local files
+*.tmp
+*.temp
+*.log
+.env
+
+# Versioned data snapshots are local artifacts by default
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/*.manifest.json
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/*.manifest.json
+
+# Future experiment and model artifacts
+/artifacts/
+/runs/
+/checkpoints/
+/models/
+*.ckpt
+*.h5
+*.keras
+*.pt
+*.pth
+*.safetensors
+
+# Conservative public-release boundary guardrails
+*.zip
+*.7z
+*.rar
+*.pdf
+*.pem
+*.key
+/results/**/*.csv
+/results/**/*.json
+/results/final_test/
+/configs/final_test_execution.yaml
+/src/evaluation/final_test_evaluation.py
+/src/evaluation/run_final_test.py
+/assignment.pdf
+/original_submission.zip
+/AUDIT_REPORT.md
+/PHASE_2*.md
+/docs/GITHUB_PUBLIC_RELEASE_AUDIT.md
+/docs/GITHUB_RELEASE_CANDIDATE_REPORT.md
+/docs/GRADUATE_APPLICATION_PROJECT_SUMMARY.md
+
