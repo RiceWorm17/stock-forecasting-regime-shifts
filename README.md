@@ -170,7 +170,7 @@ The evidence does **not** establish statistical significance, causal regime effe
 
 The original one-time F1/2025 execution completed prediction generation and sealing, but strict exact-identity verification between sealed and canonical learned-prediction vectors failed after CSV serialization. The frozen protocol therefore recorded **`INVALID_STOP_NO_RERUN`**, and no second execution occurred. A subsequent read-only forensic audit identified a deterministic CSV parse-and-reserialize mechanism that altered last-place floating-point representations and reproduced the saved overall metrics, but it did not convert the run to PASS. Saved 2025 regime outputs also retain additional provenance limitations, including the absence of an end-to-end source-history threshold reconstruction. Consequently, 2025 is excluded from the primary scientific conclusions and does not confirm the D1–D5 findings.
 
-See the [final forensic audit](PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md) and the [public F1 disclosure](docs/F1_INVALID_DISCLOSURE.md). No 2025 performance number or figure is presented in this README, and the underlying F1 files are not distributed in this candidate.
+See the [final forensic audit](docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md) and the [public F1 disclosure](docs/F1_INVALID_DISCLOSURE.md). No 2025 performance number or figure is presented in this README, and the underlying F1 files are not distributed in this candidate.
 
 ## 14. Reproducibility
 
@@ -232,4 +232,4 @@ tests/         Focused synthetic data-contract, chronology, leakage, and fold te
 PHASE_2*.md    Selected development and F1-forensic reports
 ```
 
-Start with the [publication claims ledger](docs/PUBLICATION_CLAIMS_LEDGER.md) for claim-by-claim evidence, the [Phase 2G report](PHASE_2G_REPORT.md) for the combined D1–D5 model audit, the [Phase 2J report](PHASE_2J_REPORT.md) for regime analysis, and the [forensic audit](PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md) for the F1 invalidation boundary.
+Start with the [publication claims ledger](docs/PUBLICATION_CLAIMS_LEDGER.md) for claim-by-claim evidence, the [Phase 2G report](docs/audit/PHASE_2G_REPORT.md) for the combined D1–D5 model audit, the [Phase 2J report](docs/audit/PHASE_2J_REPORT.md) for regime analysis, and the [forensic audit](docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md) for the F1 invalidation boundary.

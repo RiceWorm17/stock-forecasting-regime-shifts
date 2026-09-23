@@ -42,7 +42,7 @@ All claims in this section concern four large U.S. stocks—AAPL, MSFT, GOOGL, a
 1. **Exact scientific claim.** Baseline, LightGBM, and each of the three LSTM seeds were evaluated on exactly the same 5,032 keyed D1–D5 observations, with identical actual returns and directions and without intersection-based sample shrinkage.
 2. **Supporting artifact paths.**
    - `results/combined/combined_verification_manifest_393be15393847bdcc48d9482a0d72f32437f1024e85523088dbc3194c4eabb02.json`
-   - `PHASE_2G_REPORT.md`
+   - `docs/audit/PHASE_2G_REPORT.md`
 3. **Actual numerical evidence.** Baseline: 5,032 rows; LightGBM: 5,032 rows; LSTM: 5,032 rows per seed and 15,096 rows total. There were 5,032 unique `(fold, asset, origin_date, target_date)` keys. Maximum actual-return disagreement was `0.0`; actual directions matched exactly. Fold observation counts were D1 `1,012`, D2 `1,008`, D3 `1,004`, D4 `1,000`, and D5 `1,008`.
 4. **Sample sizes and limitations.** Five calendar folds, four assets, daily next-session log returns. This is an integrity and comparability result, not evidence that any model forecasts well. Git revision identity was unavailable, so provenance relies on content hashes and manifests.
 5. **Verification status.** **VERIFIED — PASS**, including pre-write and post-write canonical-key audits.
@@ -134,7 +134,7 @@ Regime labels were derived from SPY and joined to already-frozen predictions for
 2. **Supporting artifact paths.**
    - `results/regime/development/asset_fold_regime_degradation_278dc64486ce255773a578bf6c285d7831e4f846c156ffab2a08ca99d45495eb.csv`
    - `results/regime/development/regime_failure_pattern_summary_68ba67ebb6f5f5ec2e801dee99d0345e9756d5b02c15613800e9c85d1d50391f.csv`
-   - `PHASE_2J_REPORT.md`
+   - `docs/audit/PHASE_2J_REPORT.md`
 3. **Actual numerical evidence.** LightGBM was worse under stress in trend `2/12`, volatility `7/16`, and transition `4/16` reportable contrasts; corresponding medians were `+0.0197725869`, `+0.0047359234`, and `+0.0085800342`. LSTM seed mean was worse in trend `2/12`, volatility `9/16`, and transition `8/16`; corresponding medians were `+0.0336546836`, `-0.0076179482`, and `+0.0068000639`.
 4. **Sample sizes and limitations.** `88/120` primary asset/fold contrasts were reportable. Regime dimensions overlap, observations are serially dependent, and cells are not independent replications. No formal inference was performed.
 5. **Verification status.** **VERIFIED — DESCRIPTIVE.** Saved labels, exact-key joins, cell metrics, degradation signs, and summaries were independently reproduced.
@@ -258,7 +258,7 @@ Historical integration tests had also accessed 2025 features and constructed/mat
 2. **Supporting artifact paths.**
    - `results/final_test/state/FINAL_RUN_INVALID_3ccde4a2b7614a2e0aeb5dc4c12d4ecc871726bc9eb5d1354f796451e1a17a60.json`
    - `results/final_test/verification/sealed_prediction_vector_verification_60959c133a6f2d1c0b6f3b1d97acb2b3e808dbf23bb1e95ad910fffc09a22273.json`
-   - `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`
+   - `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`
 3. **Actual numerical evidence.** Final state: `INVALID_STOP_NO_RERUN`; recorded failure: canonical learned predictions differed from sealed vectors; rerun prohibited. Pre-target verification covered 1,000 common asset/date keys, 1,000 baseline rows, 1,000 LightGBM rows, and 3,000 LSTM rows—1,000 for each seed—with finite predictions and no target columns.
 4. **Sample sizes and limitations.** Four assets × 250 target dates produced 1,000 base keys. Pre-target sealing does not prove a fresh checkpoint-to-prediction replay. No normal final verification artifact or successful final run manifest exists.
 5. **Verification status.** **VERIFIED PROCEDURAL FINDING.** The invalid status is immutable and was not changed by the forensic audit.
@@ -268,7 +268,7 @@ Historical integration tests had also accessed 2025 features and constructed/mat
 ### F1-02 — A parse-and-reserialize cycle caused the exact-identity failure
 
 1. **Exact scientific claim.** A deterministic CSV parse-and-reserialize cycle changed last-place learned-prediction representations and caused the frozen exact-equality verifier to reject the F1 run, without changing any forecast direction.
-2. **Supporting artifact path.** `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`, Sections 8–10.
+2. **Supporting artifact path.** `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`, Sections 8–10.
 3. **Actual numerical evidence.** Baseline had 0 parsed mismatches. LightGBM had 293 parsed-value mismatches, 993 serialized-text mismatches, and maximum absolute difference `1.0001765041178778e-16`. LSTM had 1,124 parsed-value mismatches, 2,938 text mismatches, and maximum absolute difference `1.0061396160665481e-16`. Forecast-direction mismatches were 0.
 4. **Sample sizes and limitations.** LightGBM had 1,000 rows; LSTM had 3,000 rows. Numerical immateriality does not override the frozen exact contract and does not restore validity. The audit did not rerun inference.
 5. **Verification status.** **VERIFIED FORENSIC FINDING.** The mechanism reproduces the mismatch counts, but the run remains invalid.
@@ -281,7 +281,7 @@ Historical integration tests had also accessed 2025 features and constructed/mat
 2. **Supporting artifact paths.**
    - `results/final_test/metrics/nonregime/f1_macro_direct_bdf87b913ff2904efa0a4d99e1d24cb201b3a7efc9bcdb4d814f6d671c1d58d3.csv`
    - `results/final_test/metrics/nonregime/f1_macro_lstm_seed_summary_dffa89cacadd5bec7ea306a4f00a65ff02c9bb0c86d1032c164fcdc7506b30e1.csv`
-   - `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`
+   - `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`
 3. **Actual numerical evidence.** Persistence: MAE `0.014869915629502932`, RMSE `0.02176945271641622`, DA `0.478`. LightGBM: MAE `0.014821168884570853`, RMSE `0.021804041335958535`, DA `0.530`, MAE Skill `+0.002477400303526389`, DA difference `+0.05200000000000002`. LSTM seed mean: MAE `0.015237191286519658`, RMSE `0.022062339019920496`, DA `0.5133333333333333`, MAE Skill `-0.02841156731966385`, DA difference `+0.035333333333333335`.
 4. **Sample sizes and limitations.** Four assets × 250 dates = 1,000 base observations; three LSTM seeds produced 3,000 LSTM rows. This is one calendar year, four stocks, and serially dependent data. There was no formal inference, fresh inference replay, or source-price reconstruction of the targets. The original run is invalid.
 5. **Verification status.** **POST-FAILURE EXPLORATORY.** The forensic audit reproduced saved non-regime tables with maximum discrepancy `8.968520370800093e-16`; that does not equal an original verifier PASS.
@@ -304,7 +304,7 @@ Historical integration tests had also accessed 2025 features and constructed/mat
 2. **Supporting artifact paths.**
    - `results/final_test/metrics/regime/f1_macro_regime_degradation_bc57c130d2a59de75c09732f7082eaa1238120024c934ab195366a1c91e0ba19.csv`
    - `results/final_test/regime/f1_unique_2025_regime_labels_6c07fee486542782690d36f48cabe9f8428f2a36eae0cb5f85fd28fb058215f0.csv`
-   - `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`
+   - `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md`
 3. **Actual numerical evidence.** LightGBM degradation was transition-minus-stable `-0.002970311470`, high-minus-low volatility `-0.002115952440`, and negative-minus-positive trend `+0.004538054854`. LSTM seed-mean degradation was transition `+0.000091334081`, volatility `-0.042396009238`, and trend `-0.028900402588`. The 250 unique origins comprised 67 transition/183 stable, 147 high/103 low volatility, and 64 negative/186 positive trend observations.
 4. **Sample sizes and limitations.** 250 unique 2025 origins repeated across four assets; three LSTM seeds. Regimes overlap. The audit reproduced saved downstream tables to at most `1.8735013540549517e-15`, but it did not independently refit the 2015–2024 threshold distributions from source history. The execution remains invalid and no causal inference is permitted.
 5. **Verification status.** **POST-FAILURE EXPLORATORY; downstream reproduction verified, end-to-end threshold reproduction partial.**
@@ -331,13 +331,13 @@ The following statements are not suitable for the README, CV, abstract, portfoli
 | “The reported MAE Skill is MASE.” | The completed artifacts report matched-baseline MAE Skill, a different quantity. | Metric contract in `docs/REGIME_PREREGISTRATION.md` and combined tables | No | No | **EXCLUDE** |
 | “The regime summaries cover all five folds.” | Every model/dimension summary is `descriptive_incomplete`; only three trend and four volatility/transition folds were reportable. | R-07 | No | No | **EXCLUDE** |
 | “The five-fold quartiles or seed dispersion are inferential uncertainty.” | They are descriptive summaries, not confidence intervals or formal time-series inference. | `docs/REGIME_PREREGISTRATION.md`; D-06; R-07 | No | No | **EXCLUDE** |
-| “PatchTST outperformed the completed benchmarks” or has D1–D5/F1 regime results. | No full PatchTST benchmark was admitted; pilot validation predictions were excluded from the regime study, and PatchTST is absent from F1. | `PHASE_2H_C_REPORT.md`; `docs/REGIME_PREREGISTRATION.md`; forensic audit | No | No | **EXCLUDE** |
+| “PatchTST outperformed the completed benchmarks” or has D1–D5/F1 regime results. | No full PatchTST benchmark was admitted; pilot validation predictions were excluded from the regime study, and PatchTST is absent from F1. | `docs/audit/PHASE_2H_C_REPORT.md`; `docs/REGIME_PREREGISTRATION.md`; forensic audit | No | No | **EXCLUDE** |
 | “F1/2025 passed, validated, replicated, or confirmed the development results.” | The original execution is `INVALID_STOP_NO_RERUN` and failed its frozen exact verification after target access. | F1-01; invalid-state artifact | No | No | **EXCLUDE** |
-| “2025 was untouched or pristine.” | Historical integration tests accessed 2025 features and constructed/materialized targets; the original F1 then accessed targets. | `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` | No | No | **EXCLUDE** |
+| “2025 was untouched or pristine.” | Historical integration tests accessed 2025 features and constructed/materialized targets; the original F1 then accessed targets. | `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` | No | No | **EXCLUDE** |
 | “The saved F1 metrics passed the original independent verifier.” | The verifier stopped at exact sealed-versus-canonical learned-prediction inequality; no successful final verification artifact exists. | F1-01, F1-02 | No | No | **EXCLUDE** |
 | “Fresh inference proved checkpoint-to-prediction identity for F1.” | The forensic audit did not rerun inference. | F1-01; forensic limitations | No | No | **EXCLUDE** |
 | “The forensic audit independently reconstructed 2025 targets from prices or refit the F1 regime thresholds from source history.” | It verified internal alignment and preserved provenance but did neither source-level reconstruction. | F1-03, F1-05 | No | No | **EXCLUDE** |
-| “No other F1 defect can exist.” | The audit found no additional conclusion-changing defect within bounded checks; that is not proof of absence. | `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` | No | No | **EXCLUDE** |
+| “No other F1 defect can exist.” | The audit found no additional conclusion-changing defect within bounded checks; that is not proof of absence. | `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` | No | No | **EXCLUDE** |
 | “The local runtime gap establishes a general model-efficiency ratio.” | The recorded times come from one reference execution and are not hardware-normalized. | D-07 | No | No | **EXCLUDE** |
 
 ---

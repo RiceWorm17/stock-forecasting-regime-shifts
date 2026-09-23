@@ -12,7 +12,7 @@
 | Scope | Daily next-trading-day forecasts for four U.S. stocks, with SPY as the market reference |
 | Primary purpose | Measure out-of-sample model robustness under chronological and market-regime shifts |
 | Out of scope | Investment advice, trading profitability, and production trading systems |
-| Prior evidence | Private forensic audit retained outside this public candidate; its publication-relevant boundary is summarized in `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` and `docs/F1_INVALID_DISCLOSURE.md` |
+| Prior evidence | Private forensic audit retained outside this public candidate; its publication-relevant boundary is summarized in `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` and `docs/F1_INVALID_DISCLOSURE.md` |
 
 Implementation choices must conform to this frozen specification. Any material future change to the target definition, forecast timing, fold boundaries, final-test policy, feature availability, regime definitions, required model families, or primary evaluation metrics must be documented explicitly as a specification amendment rather than changed silently in code.
 

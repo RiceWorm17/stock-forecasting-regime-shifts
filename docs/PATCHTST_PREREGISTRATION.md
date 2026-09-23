@@ -17,7 +17,7 @@ This Phase 2H-A document operationalizes, but does not alter, experiment specifi
 That decision is bound to:
 
 - `results/combined/patchtst_gate_decision_b46fb9ca62675417594a69fab761792370a867fbb9ba8979eb8928e45230cfb7.json`, SHA-256 `b46fb9ca62675417594a69fab761792370a867fbb9ba8979eb8928e45230cfb7`;
-- `PHASE_2G_REPORT.md`, SHA-256 `e745662a3a8a8a8497348e2480e821a44ab4b55d7ff16721e3f42067db607667`;
+- `docs/audit/PHASE_2G_REPORT.md`, SHA-256 `e745662a3a8a8a8497348e2480e821a44ab4b55d7ff16721e3f42067db607667`;
 - raw data SHA-256 `55f74f058493102387f1c2d0a848bd673a3cfa0473d617dfdb34aea8a94f7736`; and
 - processed data SHA-256 `9352da6b434011f9844ef0acc1813ea33dce39152712752bba21a3005aabf7be`.
 

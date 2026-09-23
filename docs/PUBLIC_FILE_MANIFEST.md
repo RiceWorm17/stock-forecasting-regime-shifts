@@ -22,10 +22,10 @@ The candidate contains 98 files after creation of `PUBLIC_FILES.sha256`. That ch
 PUBLIC_FILES.sha256
 README.md
 pyproject.toml
-PHASE_2G_REPORT.md
-PHASE_2H_C_REPORT.md
-PHASE_2J_REPORT.md
-PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md
+docs/audit/PHASE_2G_REPORT.md
+docs/audit/PHASE_2H_C_REPORT.md
+docs/audit/PHASE_2J_REPORT.md
+docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md
 ```
 
 The staged `README.md` contains publication-only availability edits. The four phase reports are unchanged copies from the private archive.

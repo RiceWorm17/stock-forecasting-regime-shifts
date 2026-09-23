@@ -25,10 +25,10 @@ provenance:
     path: docs/PATCHTST_PREREGISTRATION.md
     sha256: adb4be727379d005dc69fd6d8528c6e46abda993394f21a946097e59cabfb486
   phase2g_report:
-    path: PHASE_2G_REPORT.md
+    path: docs/audit/PHASE_2G_REPORT.md
     sha256: e745662a3a8a8a8497348e2480e821a44ab4b55d7ff16721e3f42067db607667
   phase2hc_report:
-    path: PHASE_2H_C_REPORT.md
+    path: docs/audit/PHASE_2H_C_REPORT.md
     sha256: 01ce5c04c76a56219ddcb542c01b77ff560777420aeecab92903cc22fd0521b9
   patchtst_authorization:
     path: results/patchtst/authorization/patchtst_full_benchmark_authorization_5b63c323c9b28ddd1aa666365fb9df785fc21e6d45705317624e2ac77c811405.json

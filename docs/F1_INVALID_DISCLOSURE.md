@@ -12,5 +12,5 @@ Accordingly:
 - The original authorization was consumed; no rerun, retraining, inference, or prediction regeneration was performed for this release audit.
 - Raw F1 outputs, predictions, metrics, authorization records, signing material, and state records are retained only in the private archive and are not redistributed here.
 
-The unchanged `PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` documents the preserved failure boundary. Its inclusion is for transparency, not evidence of a valid final test.
+The unchanged `docs/audit/PHASE_2L_FINAL_FORENSIC_AUDIT_REPORT.md` documents the preserved failure boundary. Its inclusion is for transparency, not evidence of a valid final test.
 

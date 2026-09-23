@@ -109,7 +109,7 @@ FROZEN_FILE_HASHES: Mapping[str, str] = {
     "docs/PATCHTST_PREREGISTRATION.md": PATCHTST_PREREGISTRATION_SHA256,
     "configs/patchtst_search.yaml": PATCHTST_SEARCH_SHA256,
     "PHASE_2H_A_REPORT.md": PHASE_2H_A_REPORT_SHA256,
-    "PHASE_2G_REPORT.md": PHASE_2G_REPORT_SHA256,
+    "docs/audit/PHASE_2G_REPORT.md": PHASE_2G_REPORT_SHA256,
     "results/combined/patchtst_gate_decision_b46fb9ca62675417594a69fab761792370a867fbb9ba8979eb8928e45230cfb7.json": PHASE_2G_GATE_SHA256,
     "results/combined/combined_verification_manifest_393be15393847bdcc48d9482a0d72f32437f1024e85523088dbc3194c4eabb02.json": PHASE_2G_VERIFICATION_SHA256,
     "pyproject.toml": PYPROJECT_SHA256,

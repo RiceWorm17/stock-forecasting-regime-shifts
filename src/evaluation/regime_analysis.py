@@ -33,7 +33,7 @@ from src.evaluation.walk_forward import (
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 RESULT_ROOT = REPOSITORY_ROOT / "results" / "regime" / "development"
-REPORT_PATH = REPOSITORY_ROOT / "PHASE_2J_REPORT.md"
+REPORT_PATH = REPOSITORY_ROOT / "docs/audit/PHASE_2J_REPORT.md"
 
 SPEC_VERSION = "1.1"
 FOLDS = tuple(DEVELOPMENT_FOLD_IDS)
